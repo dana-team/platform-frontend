@@ -1,32 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import Icon from "@mdi/react";
-import {
-  mdiApplicationBraces,
-  mdiAccountGroup,
-  mdiLock,
-  mdiCog,
-} from "@mdi/js";
-import Typography from "components/Typography";
-
-const sidebarItems = [
-  {
-    icon: mdiApplicationBraces,
-    label: "Applications",
-  },
-  {
-    icon: mdiAccountGroup,
-    label: "Members",
-  },
-  {
-    icon: mdiLock,
-    label: "Secrets",
-  },
-  {
-    icon: mdiCog,
-    label: "Settings",
-  },
-];
+import Typography from "components/Typography/Typography";
+import { sidebarItems } from "./items";
 
 export default function SideBar() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
@@ -37,19 +13,22 @@ export default function SideBar() {
 
   return (
     <div
-      className={`h-full top-0 left-0 flex-none transition-all duration-500 ${
+      className={` top-0 left-0 flex-none transition-all duration-500 ${
         isSidebarExpanded ? "w-52" : "w-18"
       }`}
       onClick={toggleSidebar}
     >
-      <div className="lg:block bg-sidebar-grey h-full font-sans font-normal rounded-none border-none pt-6 gap-1 px-3">
+      <div className="lg:block bg-primary h-full font-sans font-normal rounded-none border-none pt-6 gap-1 px-3">
         {sidebarItems.map((item) => (
           <div
-            key={item.label} // Add a unique key for each item
-            className="h-12 gap-3 pl-3 flex items-center justify-start cursor-pointer rounded-md group hover:bg-black"
+            key={item.label}
+            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+              e.stopPropagation()
+            }
+            className="h-12 gap-3 pl-3 flex items-center justify-start cursor-pointer rounded-md group hover:bg-black text-secondary"
           >
             <Typography
-              className="group-hover:text-white font-normal text-sm"
+              className="transition-all duration-300 group-hover:text-white font-normal text-sm text-secondary"
               children={
                 <Icon
                   path={item.icon}

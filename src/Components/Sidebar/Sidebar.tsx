@@ -13,7 +13,7 @@ export default function SideBar() {
 
   return (
     <div
-      className={` top-0 left-0 flex-none transition-all duration-500 ${
+      className={`top-0 left-0 flex-none transition-all duration-500 ${
         isSidebarExpanded ? "w-52" : "w-18"
       }`}
       onClick={toggleSidebar}

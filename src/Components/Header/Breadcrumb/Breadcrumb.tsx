@@ -36,7 +36,7 @@ const BreadcrumbItem: React.FC<BreadcrumbProps> = ({
     )}
     {!isLast && (
       <Typography
-        className="pointer-events-none mx-2 select-none font-sans font-normal leading-normal antialiased group-hover:text-white text-secondary transition-all duration-300"
+        className="pointer-events-none mx-2 select-none font-sans leading-normal antialiased group-hover:text-white text-secondary transition-all duration-300"
         children={"/"}
       />
     )}

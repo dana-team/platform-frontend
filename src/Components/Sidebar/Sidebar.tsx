@@ -1,11 +1,14 @@
-import React from "react";
 import { useState } from "react";
-import Icon from "@mdi/react";
-import Typography from "components/Typography/Typography";
 import { sidebarItems } from "./items";
+import SideBarItem from "./SidebarItem/SidebarItem";
 
 export default function SideBar() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const handleOptionSelect = (option: string) => {
+    setSelectedOption(option);
+  };
 
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);
@@ -18,36 +21,15 @@ export default function SideBar() {
       }`}
       onClick={toggleSidebar}
     >
-      <div className="lg:block bg-primary h-full font-sans font-normal rounded-none border-none pt-6 gap-1 px-3">
+      <div className="lg:block bg-mono/basic-13 h-full font-sans rounded-none border-none pt-6 gap-1 px-3 text-base">
         {sidebarItems.map((item) => (
-          <div
+          <SideBarItem
+            selectedOption={selectedOption}
+            onOptionSelect={handleOptionSelect}
+            item={item}
+            isSidebarExpanded={isSidebarExpanded}
             key={item.label}
-            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-              e.stopPropagation()
-            }
-            className="h-12 gap-3 pl-3 flex items-center justify-start cursor-pointer rounded-md group hover:bg-black text-secondary"
-          >
-            <Typography
-              className="transition-all duration-300 group-hover:text-white font-normal text-sm text-secondary"
-              children={
-                <Icon
-                  path={item.icon}
-                  style={{
-                    maxWidth: 18,
-                    minWidth: 18,
-                    minHeight: 18,
-                    maxHeight: 18,
-                  }}
-                />
-              }
-            />
-            <Typography
-              children={item.label}
-              className={`transition-all duration-300 ${
-                isSidebarExpanded ? "opacity-1" : "opacity-0"
-              } text-s group-hover:text-white`}
-            />
-          </div>
+          />
         ))}
       </div>
     </div>

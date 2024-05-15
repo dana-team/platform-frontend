@@ -1,16 +1,15 @@
 import React from "react";
 import { ReactNode } from "react";
 
-type TypographyVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+type TypographyVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "p";
 
 const defaultStyles: Record<TypographyVariants, string> = {
-  h1: "font-bold text-2xl",
-  h2: "font-bold text-xl",
-  h3: "font-bold text-lg",
-  h4: "font-bold text-base",
-  h5: "font-bold text-sm",
-  h6: "font-bold text-xs",
-  p: "font-normal",
+  h1: "font-semibold text-headline-xl",
+  h2: "font-semibold text-headline-lg",
+  h3: "font-medium text-headline-md",
+  h4: "font-medium text-headline-sm",
+  h5: "font-medium text-headline-xs",
+  p: "",
 };
 
 interface TypographyProps {

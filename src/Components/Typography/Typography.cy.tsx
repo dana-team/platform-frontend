@@ -62,15 +62,6 @@ describe("Typography component", () => {
       .contains("Heading 5")
       .should("have.class", "font-bold text-sm");
 
-    cy.mount(
-      <Typography tag="h6" variant="h6">
-        Heading 6
-      </Typography>
-    );
-    cy.get("h6")
-      .contains("Heading 6")
-      .should("have.class", "font-bold text-xs");
-
     cy.mount(<Typography variant="p">Paragraph</Typography>);
     cy.get("p").contains("Paragraph").should("have.class", "font-normal");
   });

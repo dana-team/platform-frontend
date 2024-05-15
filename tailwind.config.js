@@ -18,7 +18,7 @@ export default {
         {
           lineHeight: "31.75px",
           letterSpacing: "normal",
-          fontWeight: "700",
+          fontWeight: "600",
         },
       ],
       "headline-md": [
@@ -45,8 +45,36 @@ export default {
           fontWeight: "600",
         },
       ],
+      "label-md": [
+        "13px",
+        {
+          lineHeight: "17.2px",
+          letterSpacing: "normal",
+          fontWeight: "500",
+        },
+      ],
+      "body-lg": [
+        "14px",
+        {
+          lineHeight: "18.52px",
+          letterSpacing: "normal",
+          fontWeight: "400",
+        },
+      ],
+      "body-sm": [
+        "12px",
+        {
+          lineHeight: "15.88px",
+          letterSpacing: "normal",
+          fontWeight: "400",
+        },
+      ],
     },
     extend: {
+      padding: {
+        0.75: "3px",
+        2.25: "9px",
+      },
       backgroundImage: {
         "login-pattern": "url('public/login-background.png')",
       },
@@ -55,14 +83,21 @@ export default {
       },
       width: {
         18: "66px",
+        35: "140px",
         150: "620px",
+      },
+      height: {
+        13: "52px",
+        85: "330px",
       },
       colors: {
         "mono/basic": {
           1: "#FFFFFF",
           4: "#B6C2CF",
+          5: "#9FADBC",
           8: "#596773",
           10: "#38414A",
+          11: "#2C333A",
           12: "#282E33",
           14: "#1D2125",
           15: "#161A1D",
@@ -73,6 +108,9 @@ export default {
           5: "#3EECAE",
           6: "#2ACA90",
           7: "#19A874",
+        },
+        "velvet/basic": {
+          5: "#EC3E7D",
         },
       },
       backgroundColor: {

@@ -7,13 +7,13 @@ import Secrets from "../../assets/secrets.svg?react";
 
 import { ReactNode } from "react";
 
-export type SidebarItem = {
+export type Item = {
   icon: ReactNode;
   label: string;
   rotate?: number;
 };
 
-export const sidebarItems: SidebarItem[] = [
+export const sidebarItems: Item[] = [
   {
     icon: <AppsOverview />,
     label: "Applications",

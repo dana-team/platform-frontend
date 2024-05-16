@@ -16,10 +16,10 @@ const PrimaryButton = ({
 }: PrimaryButtonProps) => (
   <div
     onClick={onClick}
-    className={`flex px-5 py-2.5 border border-green/basic-7 bg-green/basic-6 rounded-lg text-mono/basic-16 ${className}`}
+    className={`flex items-center justify-center px-5 py-2.5 border border-green/basic-7 bg-green/basic-6 rounded-md text-mono/basic-16 ${className}`}
   >
     {icon && <Typography children={<Icon path={icon} size={1} />} />}
-    <Typography children={text} className=" font-sans font-semibold pl-1" />
+    <Typography children={text} className="font-sans pl-1" />
   </div>
 );
 

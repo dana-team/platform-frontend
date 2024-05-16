@@ -14,7 +14,7 @@ describe("SideBar component", () => {
   });
 
   it("expands/collapses sidebar on click", () => {
-    cy.get("div.w-52").should("exist");
+    cy.get("div.w-65").should("exist");
 
     cy.get(".flex-none").then(($el) => {
       const { left, right, top, bottom } = $el[0].getBoundingClientRect();
@@ -43,12 +43,12 @@ describe("SideBar component", () => {
       cy.get(".flex-none").click(paddingLeft, paddingTop);
     });
 
-    cy.get("div.w-52").should("exist");
+    cy.get("div.w-65").should("exist");
   });
 
   it("stops click event propagation on sidebar item click", () => {
-    cy.get("div.w-52").should("exist");
+    cy.get("div.w-65").should("exist");
     cy.get("div.cursor-pointer").first().click({ force: true });
-    cy.get("div.w-52").should("exist");
+    cy.get("div.w-65").should("exist");
   });
 });

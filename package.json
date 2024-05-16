@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "cy:open": "cypress open --component --browser chrome --config-file ./cypress.config.ts",
+    "cy:run": "cypress run --component --browser chrome --config-file ./cypress.config.ts",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {

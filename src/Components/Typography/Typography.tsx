@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 type TypographyVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "p";
 
-const defaultStyles: Record<TypographyVariants, string> = {
+export const defaultStyles: Record<TypographyVariants, string> = {
   h1: "font-semibold text-headline-xl",
   h2: "font-semibold text-headline-lg",
   h3: "font-medium text-headline-md",

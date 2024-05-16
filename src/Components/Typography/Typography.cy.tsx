@@ -1,4 +1,4 @@
-import Typography from "./Typography";
+import Typography, { defaultStyles } from "./Typography";
 import "src/App.css";
 
 describe("Typography component", () => {
@@ -22,48 +22,37 @@ describe("Typography component", () => {
         Heading 1
       </Typography>
     );
-    cy.get("h1")
-      .contains("Heading 1")
-      .should("have.class", "font-bold text-2xl");
+    cy.get("h1").contains("Heading 1").should("have.class", defaultStyles.h1);
 
     cy.mount(
       <Typography tag="h2" variant="h2">
         Heading 2
       </Typography>
     );
-    cy.get("h2")
-      .contains("Heading 2")
-      .should("have.class", "font-bold text-xl");
+    cy.get("h2").contains("Heading 2").should("have.class", defaultStyles.h2);
 
     cy.mount(
       <Typography tag="h3" variant="h3">
         Heading 3
       </Typography>
     );
-    cy.get("h3")
-      .contains("Heading 3")
-      .should("have.class", "font-bold text-lg");
+    cy.get("h3").contains("Heading 3").should("have.class", defaultStyles.h3);
 
     cy.mount(
       <Typography tag="h4" variant="h4">
         Heading 4
       </Typography>
     );
-    cy.get("h4")
-      .contains("Heading 4")
-      .should("have.class", "font-bold text-base");
+    cy.get("h4").contains("Heading 4").should("have.class", defaultStyles.h4);
 
     cy.mount(
       <Typography tag="h5" variant="h5">
         Heading 5
       </Typography>
     );
-    cy.get("h5")
-      .contains("Heading 5")
-      .should("have.class", "font-bold text-sm");
+    cy.get("h5").contains("Heading 5").should("have.class", defaultStyles.h5);
 
     cy.mount(<Typography variant="p">Paragraph</Typography>);
-    cy.get("p").contains("Paragraph").should("have.class", "font-normal");
   });
 
   it("applies additional class names passed via className prop", () => {

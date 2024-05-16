@@ -1,6 +1,5 @@
 import Modal from "components/Modal/Modal";
 import React, { useState } from "react";
-import Input from "components/Form/Input/Input";
 import Typography from "components/Typography/Typography";
 import PrimaryButton from "components/Button/PrimaryButton";
 import LoginInput from "components/Login/Input/LoginInput";
@@ -21,6 +20,7 @@ const Login: React.FC = () => {
     <div className="h-screen bg-mono/basic-15">
       <div className="h-screen bg-cover bg-no-repeat bg-login-pattern opacity-30">
         <Modal
+          closeOnEscape={true}
           children={
             <div className="bg-mono/basic-12 border border-mono/basic-10 h-85 w-150 flex flex-col py-8 px-10 rounded-lg">
               <Typography

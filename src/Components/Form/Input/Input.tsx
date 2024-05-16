@@ -43,7 +43,7 @@ const Input: React.FC<InputProps> = ({
         onChange={handleChange}
         className={`${className} w-full`}
       />
-      {type === "password" && (
+      {type === "password" && inputValue && (
         <div
           className="absolute top-0 right-0 h-full flex items-center pr-3 cursor-pointer"
           onClick={toggleShowPassword}

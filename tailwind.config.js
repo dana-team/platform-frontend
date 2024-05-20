@@ -61,6 +61,14 @@ export default {
           fontWeight: "400",
         },
       ],
+      "body-md": [
+        "13px",
+        {
+          lineHeight: "17.2px",
+          letterSpacing: "normal",
+          fontWeight: "400",
+        },
+      ],
       "body-sm": [
         "12px",
         {
@@ -73,7 +81,8 @@ export default {
     extend: {
       padding: {
         0.75: "3px",
-        2.25: "9px",
+        2.25: "9.5px",
+        5.1: "22px",
       },
       backgroundImage: {
         "login-pattern": "url('login-background.png')",
@@ -89,6 +98,7 @@ export default {
       },
       height: {
         13: "52px",
+        17: "70px",
         85: "330px",
       },
       colors: {

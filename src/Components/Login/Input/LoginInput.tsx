@@ -16,6 +16,7 @@ const LoginInput: React.FC<LoginInputProps> = ({
   setValue,
   value,
   label,
+  placeholder,
   inputType = "text",
 }: LoginInputProps) => {
   return (
@@ -26,7 +27,7 @@ const LoginInput: React.FC<LoginInputProps> = ({
       />
       <Input
         type={inputType}
-        placeholder="Insert username..."
+        placeholder={placeholder}
         value={value}
         onChange={setValue}
         className={`gap-1 py-2.25 pl-3 pr-2 h-10 text-body-lg focus:outline-none bg-mono/basic-13 rounded-md border text-mono/basic-1

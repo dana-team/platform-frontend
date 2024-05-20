@@ -14,7 +14,7 @@ export type BreadcrumbItem = {
 };
 
 const Breadcrumb = ({ breadcrumb }: BreadcrumbProps) => (
-  <div className="flex items-center">
+  <div className="flex items-center text-mono/basic-4">
     <div className="flex group items-center">
       <Typography
         children={breadcrumb.text}

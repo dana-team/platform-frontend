@@ -1,6 +1,6 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import AppIcon from "../assets/app-icon.svg?react";
+import AppIcon from "../../assets/app-icon.svg?react";
 import Modal from "components/Modal/Modal";
 import React, { useState } from "react";
 import Typography from "components/Typography/Typography";
@@ -55,11 +55,11 @@ const Login: React.FC = () => {
                   value={password}
                   inputType={"password"}
                 />
-                <div className="flex items-center justify-center pt-3 h-13 ">
+                <div className="flex items-center justify-center pt-3 h-13">
                   <PrimaryButton
                     text={"Login"}
                     onClick={handleLogin}
-                    className="h-10 w-35 bg-green/basic-5 font-semibold cursor-pointer"
+                    className="h-10 w-35 bg-green/basic-5 font-semibold cursor-pointer login"
                   />
                 </div>
               </div>

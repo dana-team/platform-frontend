@@ -1,49 +1,62 @@
+/// <reference types="vite-plugin-svgr/client" />
+import AppIcon from "../../assets/app-icon.svg?react";
+import AccountThumbnail from "../../assets/account-thumbnails/color-10.svg?react";
+import ArrowDown from "../../assets/arrow-down.svg?react";
+
 import Typography from "components/Typography/Typography";
+import Breadcrumb, { BreadcrumbItem } from "./Breadcrumb/Breadcrumb";
+// import React from "react";
 
 type HeaderProps = {
-  projectName: string;
-  application?: string;
+  breadcrumbs: BreadcrumbItem[];
+  user: { username: string; thumbnail: number };
 };
 
-const Header = ({ projectName, application }: HeaderProps) => (
-  <div className="w-full text-left bg-mono/basic-16 font-normal h-full justify-center place-content-center gap-4 text-base pl-6">
-    <nav aria-label="breadcrumb">
-      <div className="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 py-2 font-extralight">
-        <Typography
-          className={` transition-all duration-300 text-secondary opacity-80 pr-3`}
-          children={"RCS Platform"}
-        />
-        <div className="flex cursor-pointer items-center font-sans text-base font-extralight leading-normal antialiased transition-colors duration-100 text-mono/basic-4 bg-mono/basic-14 rounded-full py-2.25">
-          <div className="group flex items-center pr-5 pl-4 gap-4">
-            <Typography
-              children={projectName}
-              className="group-hover:text-white transition-all duration-300"
-            />
-            {/* <Typography
-                  children={
-                    <Icon
-                      path={mdiTriangleSmallDown}
-                      size={0.7}
-                      className="group-hover:text-white transition-all duration-300"
-                    />
-                  }
-                /> */}
+const Header = ({ breadcrumbs, user }: HeaderProps) => {
+  // const Thumbnail = React.lazy(() => import(`../../assets/account-thumbnails/color-${user.thumbnail}.svg?react`));
+  return (
+    <div className="w-full text-left bg-mono/basic-16 font-normal h-full items-center justify-between gap-4 text-base pl-6 flex">
+      <nav aria-label="breadcrumb">
+        <div className="flex w-fit flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 py-2 font-extralight">
+          <Typography
+            children={
+              <AppIcon style={{ width: "32.26px", height: "32.26px" }} />
+            }
+          />
+          <Typography
+            variant="h4"
+            children={"RCS Amplify"}
+            className="text-mono/basic-4 px-3	font-normal"
+          />
+          <div className="flex cursor-pointer items-center font-sans antialiased transition-colors duration-100  bg-mono/basic-14 rounded-full h-10	">
+            <div className="flex items-center py-2.25 pl-4 pr-5">
+              {breadcrumbs.map((breadcrumb) => (
+                <Breadcrumb breadcrumb={breadcrumb} key={breadcrumb.text} />
+              ))}
+            </div>
           </div>
-
-          {/* <Icon
-                path={mdiMinus}
-                rotate={90}
-                size={1}
-                className=" hover:text-white"
-              />
-              <Typography
-                children={application}
-                className="hover:text-white transition-all duration-300"
-              /> */}
+        </div>
+      </nav>
+      <div className="place-self-end flex items-center h-full pr-5.1">
+        <div className="relative flex justify-center items-center">
+          <AccountThumbnail />
+          {/* <Thumbnail /> */}
+          <div className="text-white absolute inset-0 flex justify-center items-center font-medium">
+            MZ
+          </div>
+        </div>
+        <div className="flex items-center group cursor-pointer">
+          <Typography
+            children={"Israel Israeli"}
+            className="text-mono/basic-4 pl-3 text-body-md group-hover:text-white transition-all duration-300"
+          />
+          <Typography
+            children={<ArrowDown />}
+            className="text-mono/basic-4 group-hover:text-white transition-all duration-300"
+          />
         </div>
       </div>
-    </nav>
-  </div>
-);
-
+    </div>
+  );
+};
 export default Header;

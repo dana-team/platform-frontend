@@ -1,5 +1,5 @@
 import LoginInput from "./LoginInput";
-import "src/App.css";
+import "src/index.css";
 
 // add asserts for border
 describe("LoginInput Component", () => {

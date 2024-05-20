@@ -19,17 +19,14 @@ const Breadcrumb = ({ breadcrumb }: BreadcrumbProps) => (
       <Typography
         variant="headline-xs"
         children={breadcrumb.text}
-        className="group-hover:text-white transition-all duration-300"
+        className="group-hover-white"
       />
       {breadcrumb.isDropdown && (
-        <Typography
-          children={<ArrowDown />}
-          className="group-hover:text-white transition-all duration-300"
-        />
+        <Typography children={<ArrowDown />} className="group-hover-white" />
       )}
     </div>
     {breadcrumb.shouldAddDivider && (
-      <Typography className=" hover:text-white px-4" children={<Divider />} />
+      <Typography className=" px-4" children={<Divider />} />
     )}
   </div>
 );

@@ -1,5 +1,5 @@
 import Typography from "./Typography";
-import "src/App.css";
+import "src/index.css";
 
 describe("Typography component", () => {
   beforeEach(() => {

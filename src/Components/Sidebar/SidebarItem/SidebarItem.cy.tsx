@@ -2,7 +2,7 @@
 
 import AppsOverview from "../../../assets/apps_overview.svg?react";
 import SidebarItem from "./SidebarItem";
-import "src/App.css";
+import "src/index.css";
 
 describe("SidebarItem", () => {
   const item = { icon: <AppsOverview />, label: "Applications" };

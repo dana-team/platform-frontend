@@ -1,4 +1,4 @@
-import "src/App.css";
+import "src/index.css";
 import Input from "./Input";
 
 describe("Input Component", () => {

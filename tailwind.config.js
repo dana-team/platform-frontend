@@ -154,7 +154,8 @@ export default {
       padding: {
         0.75: "3px",
         2.25: "9px",
-        5.1: "22px",
+        4.25: "17px",
+        5.5: "22px",
       },
       backgroundImage: {
         "login-pattern": "url('login-background.png')",

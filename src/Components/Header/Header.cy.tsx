@@ -1,4 +1,4 @@
-import "src/App.css";
+import "src/index.css";
 import { BreadcrumbItem } from "./Breadcrumb/Breadcrumb";
 import Header from "./Header";
 

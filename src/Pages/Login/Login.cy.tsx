@@ -1,4 +1,4 @@
-import "src/App.css";
+import "src/index.css";
 import Login from "./Login";
 
 describe("Login Component", () => {

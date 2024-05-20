@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .group-hover-white {
+    @apply group-hover:text-white transition-all duration-300;
+  }
+}

@@ -1,6 +1,6 @@
 import SideBar from "./Sidebar";
 import { sidebarItems } from "./items";
-import "src/App.css";
+import "src/index.css";
 
 describe("SideBar component", () => {
   beforeEach(() => {

@@ -17,9 +17,9 @@ const Breadcrumb = ({ breadcrumb }: BreadcrumbProps) => (
   <div className="flex items-center text-mono/basic-4">
     <div className="flex group items-center">
       <Typography
+        variant="headline-xs"
         children={breadcrumb.text}
-        variant="h5"
-        className="group-hover:text-white transition-all duration-300 font-normal"
+        className="group-hover:text-white transition-all duration-300"
       />
       {breadcrumb.isDropdown && (
         <Typography

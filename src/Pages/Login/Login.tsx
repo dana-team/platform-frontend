@@ -27,16 +27,16 @@ const Login: React.FC = () => {
           children={
             <div className="flex flex-col items-center justify-center">
               <div className="flex items-center justify-center pb-4">
-                <Typography children={<AppIcon />} className="" />
+                <Typography children={<AppIcon />} />
                 <Typography
-                  variant="h3"
+                  variant="headline-md"
                   children={"RCS Amplify"}
-                  className="text-mono/basic-4 pl-3	font-normal"
+                  className="text-mono/basic-4 pl-3"
                 />
               </div>
               <div className="bg-mono/basic-12 border border-mono/basic-10 h-85 w-150 flex flex-col py-8 px-10 rounded-lg">
                 <Typography
-                  variant="h2"
+                  variant="headline-lg"
                   children={"Login to RCS Amplify"}
                   className="text-mono/basic-1 gap-2 mb-5 h-8"
                 />

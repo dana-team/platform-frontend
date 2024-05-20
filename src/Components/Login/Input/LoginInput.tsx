@@ -22,8 +22,9 @@ const LoginInput: React.FC<LoginInputProps> = ({
   return (
     <div className="flex flex-col">
       <Typography
+        variant="label-md"
         children={label}
-        className="text-label-md text-mono/basic-5 mb-1"
+        className="text-mono/basic-5 mb-1"
       />
       <Input
         type={inputType}
@@ -38,8 +39,9 @@ const LoginInput: React.FC<LoginInputProps> = ({
       }`}
       />
       <Typography
+        variant="body-sm"
         children={error}
-        className={`text-body-sm text-velvet/basic-5 mb-1 pt-0.75 h-5 ${
+        className={`text-velvet/basic-5 mb-1 pt-0.75 h-5 ${
           error ? "" : "opacity-0"
         }`}
       />

@@ -1,19 +1,19 @@
 import React from "react";
 import { ReactNode } from "react";
 
-type TypographyVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "p";
-
-export const defaultStyles: Record<TypographyVariants, string> = {
-  h1: "font-semibold text-headline-xl",
-  h2: "font-semibold text-headline-lg",
-  h3: "font-medium text-headline-md",
-  h4: "font-medium text-headline-sm",
-  h5: "font-medium text-headline-xs",
-  p: "",
-};
+type TypographyTags = "h1" | "h2" | "h3" | "h4" | "h5" | "p";
+type TypographyVariants =
+  | "headline-xs"
+  | "headline-sm"
+  | "headline-lg"
+  | "headline-xl"
+  | "headline-md"
+  | "label-md"
+  | "body-md"
+  | "body-sm";
 
 interface TypographyProps {
-  tag?: TypographyVariants;
+  tag?: TypographyTags;
   variant?: TypographyVariants;
   children: ReactNode;
   className?: string;
@@ -21,12 +21,15 @@ interface TypographyProps {
 
 const Typography: React.FC<TypographyProps> = ({
   tag: Tag = "p",
-  variant = "p",
+  variant,
   children,
   className,
 }) => {
-  const tagClass = defaultStyles[variant] || "";
-  return <Tag className={`${className} ${tagClass}`}>{children}</Tag>;
+  return (
+    <Tag className={`${className} ${variant ? `text-${variant}` : ""}`}>
+      {children}
+    </Tag>
+  );
 };
 
 export default Typography;

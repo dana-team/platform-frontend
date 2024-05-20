@@ -28,7 +28,7 @@ const SidebarItem = ({
       } `}
     >
       <Typography
-        className={`transition-all duration-300 font-sans text-base ${
+        className={`transition-all duration-300 ${
           selectedOption === item.label
             ? "text-green/basic-6 "
             : "text-mono/basic-4 group-hover:text-mono/basic-1"
@@ -36,13 +36,14 @@ const SidebarItem = ({
         children={item.icon}
       />
       <Typography
+        variant="headline-xs"
         children={item.label}
         className={`transition-all duration-300
          ${isSidebarExpanded ? "opacity-1" : "opacity-0"} 
          ${
            selectedOption === item.label
-             ? "font-normal"
-             : "text-base font-extralight"
+             ? "font-semibold"
+             : "text-base font-normal"
          } 
           group-hover:text-mono/basic-1`}
       />

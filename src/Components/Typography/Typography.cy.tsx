@@ -1,4 +1,4 @@
-import Typography, { defaultStyles } from "./Typography";
+import Typography from "./Typography";
 import "src/App.css";
 
 describe("Typography component", () => {
@@ -18,41 +18,42 @@ describe("Typography component", () => {
 
   it("applies correct default styles for each typography variant", () => {
     cy.mount(
-      <Typography tag="h1" variant="h1">
+      <Typography tag="h1" variant="headline-xs">
         Heading 1
       </Typography>
     );
-    cy.get("h1").contains("Heading 1").should("have.class", defaultStyles.h1);
+    cy.get("h1").contains("Heading 1").should("have.class", "text-headline-xs");
 
     cy.mount(
-      <Typography tag="h2" variant="h2">
+      <Typography tag="h2" variant="headline-sm">
         Heading 2
       </Typography>
     );
-    cy.get("h2").contains("Heading 2").should("have.class", defaultStyles.h2);
+    cy.get("h2").contains("Heading 2").should("have.class", "text-headline-sm");
 
     cy.mount(
-      <Typography tag="h3" variant="h3">
+      <Typography tag="h3" variant="headline-md">
         Heading 3
       </Typography>
     );
-    cy.get("h3").contains("Heading 3").should("have.class", defaultStyles.h3);
+    cy.get("h3").contains("Heading 3").should("have.class", "text-headline-md");
 
     cy.mount(
-      <Typography tag="h4" variant="h4">
+      <Typography tag="h4" variant="headline-lg">
         Heading 4
       </Typography>
     );
-    cy.get("h4").contains("Heading 4").should("have.class", defaultStyles.h4);
+    cy.get("h4").contains("Heading 4").should("have.class", "text-headline-lg");
 
     cy.mount(
-      <Typography tag="h5" variant="h5">
+      <Typography tag="h5" variant="headline-xl">
         Heading 5
       </Typography>
     );
-    cy.get("h5").contains("Heading 5").should("have.class", defaultStyles.h5);
+    cy.get("h5").contains("Heading 5").should("have.class", "text-headline-xl");
 
-    cy.mount(<Typography variant="p">Paragraph</Typography>);
+    cy.mount(<Typography>Paragraph</Typography>);
+    cy.get("p").contains("Paragraph").should("have.class", "text-headline-xl");
   });
 
   it("applies additional class names passed via className prop", () => {

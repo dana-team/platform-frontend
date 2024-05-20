@@ -8,6 +8,7 @@ export default {
       "headline-xl": [
         "28px",
         {
+          font: "Red Hat Display",
           lineHeight: "37.04px",
           letterSpacing: "normal",
           fontWeight: "700",
@@ -16,6 +17,7 @@ export default {
       "headline-lg": [
         "24px",
         {
+          font: "Red Hat Display",
           lineHeight: "31.75px",
           letterSpacing: "normal",
           fontWeight: "600",
@@ -24,6 +26,7 @@ export default {
       "headline-md": [
         "20px",
         {
+          font: "Red Hat Display",
           lineHeight: "26.46px",
           letterSpacing: "normal",
           fontWeight: "600",
@@ -32,6 +35,7 @@ export default {
       "headline-sm": [
         "18px",
         {
+          font: "Red Hat Display",
           lineHeight: "23.81px",
           letterSpacing: "normal",
           fontWeight: "600",
@@ -40,22 +44,61 @@ export default {
       "headline-xs": [
         "16px",
         {
+          font: "Red Hat Display",
           lineHeight: "21.17px",
           letterSpacing: "normal",
           fontWeight: "600",
         },
       ],
+      "label-lg": [
+        "15px",
+        {
+          font: "Red Hat Text",
+          lineHeight: "19.85px",
+          letterSpacing: "normal",
+          fontWeight: "500",
+        },
+      ],
       "label-md": [
         "13px",
         {
+          font: "Red Hat Text",
           lineHeight: "17.2px",
           letterSpacing: "normal",
           fontWeight: "500",
         },
       ],
+      "label-sm": [
+        "12px",
+        {
+          font: "Red Hat Text",
+          lineHeight: "15.88px",
+          letterSpacing: "normal",
+          fontWeight: "500",
+        },
+      ],
+      "label-xs": [
+        "9px",
+        {
+          font: "Red Hat Text",
+          lineHeight: "15.88px",
+          letterSpacing: "normal",
+          fontWeight: "500",
+        },
+      ],
+      "body-xl": [
+        "16px",
+        {
+          font: "Red Hat Text",
+          lineHeight: "21.17px",
+          letterSpacing: "normal",
+          fontWeight: "400",
+        },
+      ],
       "body-lg": [
         "14px",
         {
+          font: "Red Hat Text",
           lineHeight: "18.52px",
           letterSpacing: "normal",
           fontWeight: "400",
@@ -64,6 +107,7 @@ export default {
       "body-md": [
         "13px",
         {
+          font: "Red Hat Text",
           lineHeight: "17.2px",
           letterSpacing: "normal",
           fontWeight: "400",
@@ -72,6 +116,34 @@ export default {
       "body-sm": [
         "12px",
         {
+          font: "Red Hat Text",
+          lineHeight: "15.88px",
+          letterSpacing: "normal",
+          fontWeight: "400",
+        },
+      ],
+      "accent-lg": [
+        "14px",
+        {
+          font: "Red Hat Display",
+          lineHeight: "18.52px",
+          letterSpacing: "normal",
+          fontWeight: "700",
+        },
+      ],
+      "accent-md": [
+        "13px",
+        {
+          font: "Red Hat Display",
+          lineHeight: "17.2px",
+          letterSpacing: "normal",
+          fontWeight: "500",
+        },
+      ],
+      mono: [
+        "12px",
+        {
+          font: "Red Hat Mono",
           lineHeight: "15.88px",
           letterSpacing: "normal",
           fontWeight: "400",
@@ -81,14 +153,15 @@ export default {
     extend: {
       padding: {
         0.75: "3px",
-        2.25: "9.5px",
+        2.25: "9px",
         5.1: "22px",
       },
       backgroundImage: {
         "login-pattern": "url('login-background.png')",
       },
       fontFamily: {
-        sans: ["Red Hat Display", "Red Hat Text", "sans-serif"],
+        sans: ['"Red Hat Display"', '"Red Hat Text"', "sans-serif"],
+        mono: ['"Red Hat Mono"', "monospace"],
       },
       width: {
         18: "66px",

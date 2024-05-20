@@ -20,7 +20,6 @@ const SidebarItem = ({
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
         onOptionSelect(item.label);
-        console.log(selectedOption === item.label);
       }}
       className={`h-11 gap-2 pl-3 mb-1 flex items-center justify-start cursor-pointer rounded-md group ${
         selectedOption === item.label

@@ -1,4 +1,4 @@
-import Typography from "./Typography";
+import Typography, { TypographyVariants, TypographyTags } from "./Typography";
 import "src/index.css";
 
 describe("Typography component", () => {
@@ -17,43 +17,43 @@ describe("Typography component", () => {
   });
 
   it("applies correct default styles for each typography variant", () => {
-    cy.mount(
-      <Typography tag="h1" variant="headline-xs">
-        Heading 1
-      </Typography>
-    );
-    cy.get("h1").contains("Heading 1").should("have.class", "text-headline-xs");
+    const typographyOptions: TypographyVariants[] = [
+      "headline-xs",
+      "headline-sm",
+      "headline-lg",
+      "headline-xl",
+      "headline-md",
+      "label-md",
+      "body-md",
+      "body-sm",
+    ];
 
-    cy.mount(
-      <Typography tag="h2" variant="headline-sm">
-        Heading 2
-      </Typography>
-    );
-    cy.get("h2").contains("Heading 2").should("have.class", "text-headline-sm");
+    typographyOptions.forEach((value, index) => {
+      cy.mount(<Typography>Paragraph</Typography>);
+      cy.contains("Paragraph").should("not.have.class", `text-${value}`);
 
-    cy.mount(
-      <Typography tag="h3" variant="headline-md">
-        Heading 3
-      </Typography>
-    );
-    cy.get("h3").contains("Heading 3").should("have.class", "text-headline-md");
+      cy.mount(<Typography variant={value}>Heading {index}</Typography>);
+      cy.contains(`Heading ${index}`).should("have.class", `text-${value}`);
+    });
+  });
 
-    cy.mount(
-      <Typography tag="h4" variant="headline-lg">
-        Heading 4
-      </Typography>
-    );
-    cy.get("h4").contains("Heading 4").should("have.class", "text-headline-lg");
+  it("creates correct tag for each typography tag", () => {
+    const typographyTags: TypographyTags[] = [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "p",
+    ];
 
-    cy.mount(
-      <Typography tag="h5" variant="headline-xl">
-        Heading 5
-      </Typography>
-    );
-    cy.get("h5").contains("Heading 5").should("have.class", "text-headline-xl");
+    typographyTags.forEach((tag, index) => {
+      cy.mount(<Typography tag={tag}>Heading {index}</Typography>);
+      cy.get(tag).contains(`Heading ${index}`);
+    });
 
     cy.mount(<Typography>Paragraph</Typography>);
-    cy.get("p").contains("Paragraph").should("have.class", "text-headline-xl");
+    cy.get("p").contains("Paragraph");
   });
 
   it("applies additional class names passed via className prop", () => {

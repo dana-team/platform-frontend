@@ -1,16 +1,24 @@
 import React from "react";
 import { ReactNode } from "react";
+import { variantStyles } from "./VariantStyles";
 
 export type TypographyTags = "h1" | "h2" | "h3" | "h4" | "h5" | "p";
 export type TypographyVariants =
-  | "headline-xs"
-  | "headline-sm"
-  | "headline-lg"
   | "headline-xl"
+  | "headline-lg"
   | "headline-md"
+  | "headline-sm"
+  | "headline-xs"
+  | "label-lg"
   | "label-md"
+  | "label-sm"
+  | "label-xs"
+  | "body-xl"
+  | "body-lg"
   | "body-md"
-  | "body-sm";
+  | "body-sm"
+  | "accent-lg"
+  | "accent-md";
 
 interface TypographyProps {
   tag?: TypographyTags;
@@ -26,7 +34,11 @@ const Typography: React.FC<TypographyProps> = ({
   className,
 }) => {
   return (
-    <Tag className={`${className} ${variant ? `text-${variant}` : ""}`}>
+    <Tag
+      className={`${className ? className : ""} ${
+        variant ? variantStyles[variant] : ""
+      }`}
+    >
       {children}
     </Tag>
   );

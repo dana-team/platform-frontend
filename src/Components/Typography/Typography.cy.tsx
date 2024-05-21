@@ -2,9 +2,16 @@ import Typography, { TypographyVariants, TypographyTags } from "./Typography";
 import "src/index.css";
 
 describe("Typography component", () => {
-  beforeEach(() => {
-    cy.viewport(800, 600);
-  });
+  const typographyOptions: TypographyVariants[] = [
+    "headline-xs",
+    "headline-sm",
+    "headline-lg",
+    "headline-xl",
+    "headline-md",
+    "label-md",
+    "body-md",
+    "body-sm",
+  ];
 
   it("renders children correctly", () => {
     cy.mount(<Typography>Hello, world!</Typography>);
@@ -16,24 +23,13 @@ describe("Typography component", () => {
     cy.get("p").contains("Hello, world!").should("exist");
   });
 
-  it("applies correct default styles for each typography variant", () => {
-    const typographyOptions: TypographyVariants[] = [
-      "headline-xs",
-      "headline-sm",
-      "headline-lg",
-      "headline-xl",
-      "headline-md",
-      "label-md",
-      "body-md",
-      "body-sm",
-    ];
-
-    typographyOptions.forEach((value, index) => {
+  typographyOptions.forEach((variant, index) => {
+    it(`applies correct default styles for ${variant} typography variant`, () => {
       cy.mount(<Typography>Paragraph</Typography>);
-      cy.contains("Paragraph").should("not.have.class", `text-${value}`);
+      cy.contains("Paragraph").should("not.have.class", `text-${variant}`);
 
-      cy.mount(<Typography variant={value}>Heading {index}</Typography>);
-      cy.contains(`Heading ${index}`).should("have.class", `text-${value}`);
+      cy.mount(<Typography variant={variant}>Heading {index}</Typography>);
+      cy.contains(`Heading ${index}`).should("have.class", `text-${variant}`);
     });
   });
 

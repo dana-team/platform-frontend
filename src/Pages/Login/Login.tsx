@@ -4,7 +4,7 @@ import AppIcon from "../../assets/app-icon.svg?react";
 import Modal from "components/Modal/Modal";
 import React, { useState } from "react";
 import Typography from "components/Typography/Typography";
-import PrimaryButton from "components/Button/PrimaryButton";
+import Button from "components/Button/Button";
 import LoginInput from "components/Login/Input/LoginInput";
 
 const Login: React.FC = () => {
@@ -56,10 +56,11 @@ const Login: React.FC = () => {
                   inputType={"password"}
                 />
                 <div className="flex items-center justify-center pt-3 h-13">
-                  <PrimaryButton
-                    text={"Login"}
+                  <Button
+                    variant="primary"
                     onClick={handleLogin}
-                    className="h-10 w-35 bg-green/basic-5 font-semibold cursor-pointer login"
+                    children="Login"
+                    className="w-[140px]"
                   />
                 </div>
               </div>

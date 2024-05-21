@@ -127,7 +127,6 @@ export default {
         {
           font: "Red Hat Display",
           lineHeight: "18.52px",
-          letterSpacing: "normal",
           fontWeight: "700",
         },
       ],
@@ -179,14 +178,16 @@ export default {
         "mono/basic": {
           1: "#FFFFFF",
           4: "#B6C2CF",
+          3: "#C7D1DB",
           5: "#9FADBC",
           8: "#596773",
+          9: "#454F59",
           10: "#38414A",
           11: "#2C333A",
           12: "#282E33",
+          13: "#22262B",
           14: "#1D2125",
           15: "#161A1D",
-          13: "#22262B",
           16: "#101214",
         },
         "green/basic": {

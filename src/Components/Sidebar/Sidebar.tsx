@@ -17,7 +17,7 @@ export default function SideBar() {
       }`}
       onClick={toggleSidebar}
     >
-      <div className="lg:block bg-mono/basic-13 h-full font-sans rounded-none border-none pt-9 gap-1 px-3 text-base">
+      <div className="lg:block bg-mono/basic-13 h-full font-sans rounded-none border-none pt-9 gap-1 px-3">
         {sidebarItems.map((item) => (
           <SidebarItem
             selectedOption={selectedOption}

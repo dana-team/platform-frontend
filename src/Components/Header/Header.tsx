@@ -5,6 +5,7 @@ import ArrowDown from "../../assets/arrow-down.svg?react";
 import Typography from "components/Typography/Typography";
 import Breadcrumb, { BreadcrumbItem } from "./Breadcrumb/Breadcrumb";
 import { useEffect, useState } from "react";
+import { APP_NAME } from "src/common/consts";
 
 type HeaderProps = {
   breadcrumbs: BreadcrumbItem[];
@@ -38,7 +39,7 @@ const Header = ({ breadcrumbs, user }: HeaderProps) => {
           />
           <Typography
             variant="headline-sm"
-            children={"RCS Amplify"}
+            children={APP_NAME}
             className="text-mono/basic-4 pl-2.5 pr-4.25"
           />
           <div className="flex cursor-pointer items-center antialiased transition-colors duration-100 bg-mono/basic-14 rounded-full h-fit">

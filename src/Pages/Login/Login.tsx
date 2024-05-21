@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import Typography from "components/Typography/Typography";
 import Button from "components/Button/Button";
 import LoginInput from "components/Login/Input/LoginInput";
+import { APP_NAME } from "src/common/consts";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -30,14 +31,14 @@ const Login: React.FC = () => {
                 <Typography children={<AppIcon />} />
                 <Typography
                   variant="headline-md"
-                  children={"RCS Amplify"}
+                  children={APP_NAME}
                   className="text-mono/basic-4 pl-3"
                 />
               </div>
               <div className="bg-mono/basic-12 border border-mono/basic-10 h-85 w-150 flex flex-col py-8 px-10 rounded-lg">
                 <Typography
                   variant="headline-lg"
-                  children={"Login to RCS Amplify"}
+                  children={`Login to ${APP_NAME}`}
                   className="text-mono/basic-1 gap-2 mb-5 h-8"
                 />
                 <LoginInput

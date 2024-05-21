@@ -1,5 +1,6 @@
 import "src/index.css";
 import Login from "./Login";
+import { APP_NAME } from "src/common/consts";
 
 describe("Login Component", () => {
   beforeEach(() => {
@@ -7,8 +8,8 @@ describe("Login Component", () => {
   });
 
   it("renders login modal with correct elements", () => {
-    cy.contains("RCS Amplify").should("be.visible");
-    cy.contains("Login to RCS Amplify").should("be.visible");
+    cy.contains(APP_NAME).should("be.visible");
+    cy.contains(`Login to ${APP_NAME}`).should("be.visible");
 
     cy.get('input[placeholder="Insert username..."]').should("exist");
     cy.get('input[placeholder="Insert password..."]').should("exist");

@@ -1,6 +1,7 @@
 import "src/index.css";
 import { BreadcrumbItem } from "./Breadcrumb/Breadcrumb";
 import Header from "./Header";
+import { APP_NAME } from "src/common/consts";
 
 describe("Header Component", () => {
   const breadcrumbs: BreadcrumbItem[] = [
@@ -12,7 +13,7 @@ describe("Header Component", () => {
   it("renders header with breadcrumbs and user info", () => {
     cy.mount(<Header breadcrumbs={breadcrumbs} user={user} />);
 
-    cy.contains("RCS Amplify").should("be.visible");
+    cy.contains(APP_NAME).should("be.visible");
     cy.contains("Home").should("be.visible");
     cy.contains("Dashboard").should("be.visible");
     cy.contains("Israel Israeli").should("be.visible");

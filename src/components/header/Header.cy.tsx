@@ -2,6 +2,7 @@ import "@index.css";
 import { BreadcrumbItem } from "./breadcrumb/Breadcrumb";
 import Header from "./Header";
 import { APP_NAME } from "@common/consts";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const breadcrumbs: BreadcrumbItem[] = [
   { text: "Home", isDropdown: false, shouldAddDivider: false },
@@ -10,8 +11,14 @@ const breadcrumbs: BreadcrumbItem[] = [
 const user = "Israel Israeli";
 
 describe("Header Component", () => {
+  const queryClient = new QueryClient();
+
   beforeEach(() => {
-    cy.mount(<Header breadcrumbs={breadcrumbs} user={user} />);
+    cy.mount(
+      <QueryClientProvider client={queryClient}>
+        <Header breadcrumbs={breadcrumbs} user={user} />
+      </QueryClientProvider>
+    );
   });
 
   it("renders header with breadcrumbs and user info", () => {

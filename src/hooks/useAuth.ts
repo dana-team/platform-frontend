@@ -7,11 +7,12 @@ export const useAuth = () => {
   const [thumbnail, setThumbnail] = useLocalStorage<number>("thumbnail", 1);
   const [username, setUsername] = useLocalStorage<string>("username", "");
   const [token, setToken] = useLocalStorage<string>("token", "");
-
+  
   const signIn = (token: string, user: string) => {
     setToken(token);
     setUsername(user);
     localStorage.setItem("isAuthenticated", "true");
+    router.invalidate();
   };
 
   const signOut = () => {

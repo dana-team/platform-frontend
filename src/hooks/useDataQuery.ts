@@ -1,17 +1,21 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import {
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { useFetch } from "./useFetch";
-import { FetchResponse } from "@models/response/response";
+import { IFetchResponse } from "@models/response/response";
 
 export function useDataQuery(
-  queryKey: string | string[],
   url: string,
+  options: UseQueryOptions<IFetchResponse, Error, IFetchResponse>,
   headers?: HeadersInit
-): UseQueryResult<FetchResponse> {
+): UseQueryResult<IFetchResponse> {
   const { fetchInstance } = useFetch();
 
-  const key = Array.isArray(queryKey) ? queryKey : [queryKey];
-  return useQuery<FetchResponse>({
-    queryKey: key,
+  return useQuery<IFetchResponse>({
+    ...options,
+    queryKey: options?.queryKey,
     queryFn: () => fetchInstance.get(url, headers),
   });
 }

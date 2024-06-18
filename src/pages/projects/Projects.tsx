@@ -16,11 +16,11 @@ const Projects: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col">
-      <div className="h-17">
+      <div className="h-[10%]">
         <Header breadcrumbs={breadcrumbs} user={username} />
       </div>
 
-      <div className="w-full h-full flex">
+      <div className="w-full h-[90%] flex">
         <Outlet />
       </div>
     </div>

@@ -1,5 +1,7 @@
 import { http, HttpHandler, HttpResponse } from "msw";
+import { projectsHandlers } from "./handlers/projects";
 import { API_URL } from "@common/consts";
+import { hierarchiesHandlers } from "./handlers/hierarchies";
 
 const containersHandlers: HttpHandler[] = [
   http.get(
@@ -12,6 +14,29 @@ const containersHandlers: HttpHandler[] = [
       });
     }
   ),
+];
+
+const namespacesHandlers: HttpHandler[] = [
+  http.get(`${API_URL}/namespaces`, () => {
+    return HttpResponse.json({
+      namespaces: ["namespace1", "namespace2", "namespace3"],
+      count: 3,
+    });
+  }),
+  http.get(`${API_URL}/namespaces/:namespace`, () => {
+    return HttpResponse.json({
+      namespace: "namespace",
+    });
+  }),
+  http.post(`${API_URL}/namespaces`, async ({ request }) => {
+    const requestData = await request.json();
+    console.log(
+      `POST namespaces sent , request:  ${JSON.stringify(requestData)}`
+    );
+    return HttpResponse.json({
+      namespace: "namespace",
+    });
+  }),
 ];
 
 const secretsHandlers: HttpHandler[] = [
@@ -79,6 +104,9 @@ export const handlers: HttpHandler[] = [
   ...containersHandlers,
   ...secretsHandlers,
   ...authHandlers,
+  ...namespacesHandlers,
+  ...projectsHandlers,
+  ...hierarchiesHandlers,
   http.get("/posts", () => {
     console.log('Captured a "GET /posts" request');
     return HttpResponse.json({

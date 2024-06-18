@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
-  "/_authenticated/projects/$projectName/applications/$applicationName/",
+  "/_authenticated/projects/$projectName/applications/$applicationName/"
 )({
   component: () => (
     <div>

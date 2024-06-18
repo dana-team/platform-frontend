@@ -7,12 +7,12 @@ import { useAuth } from "./hooks/useAuth.ts";
 import NotFound from "./pages/notFound/NotFound.tsx";
 
 export type RouterContext = {
-  isAuthenticated: (() => boolean) | undefined;
+  isAuthenticated: () => boolean;
 };
 
 const router = createRouter({
   routeTree,
-  context: { isAuthenticated: undefined },
+  context: { isAuthenticated: undefined! },
   defaultPreload: "intent",
   defaultPreloadStaleTime: 0,
   defaultErrorComponent: ({ error }) => <div>{`${error}`}</div>,

@@ -16,6 +16,7 @@ export type BreadcrumbItem = {
   shouldAddDivider?: boolean;
 };
 
+// TODO: add list projects by user
 const Breadcrumb = React.memo(
   ({ text, isDropdown, shouldAddDivider }: BreadcrumbProps) => (
     <div className="flex items-center text-mono/basic-4">

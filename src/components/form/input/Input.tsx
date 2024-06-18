@@ -1,7 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import Typography from "@/components/typography/Typography";
-import React, { useState, forwardRef} from "react";
+import React, { useState, forwardRef } from "react";
 import ShowHideInput from "../showHideInput/ShowHideInput";
 
 interface InputProps {
@@ -35,9 +35,12 @@ const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
               : "border-mono/basic-11 focus:border-green/basic-6"
           }`}
           />
-          {type === "password" && 
-            <ShowHideInput showPassword={showPassword} setShowPassword={setShowPassword}/>
-          }
+          {type === "password" && (
+            <ShowHideInput
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+            />
+          )}
         </div>
         <Typography
           variant="body-sm"
@@ -49,7 +52,7 @@ const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
         </Typography>
       </div>
     );
-  },
+  }
 );
 
 export default Input;

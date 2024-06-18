@@ -32,6 +32,7 @@ const Typography: React.FC<TypographyProps> = React.memo(
   ({ as: Tag = "p", variant, children, className }) => {
     return (
       <Tag
+        tabIndex={0}
         className={`${className ? className : ""} ${
           variant ? variantStyles[variant] : ""
         }`}
@@ -39,7 +40,7 @@ const Typography: React.FC<TypographyProps> = React.memo(
         {children}
       </Tag>
     );
-  },
+  }
 );
 
 export default Typography;

@@ -5,37 +5,51 @@ import {
 } from "@tanstack/react-query";
 import { useState } from "react";
 import { useFetch } from "@hooks/useFetch";
-import { FetchResponse } from "@models/response/response";
+import { IFetchResponse } from "@models/response/response";
 
-export interface MutateInstance<T> {
-  post: UseMutationResult<FetchResponse, Error, T>;
-  put: UseMutationResult<FetchResponse, Error, T>;
-  delete: UseMutationResult<FetchResponse, Error, T>;
+type RequestVariables<T> = {
+  body?: T;
+  headersInit?: HeadersInit;
+};
+
+export interface IMutateInstance<T> {
+  post: UseMutationResult<IFetchResponse, Error, T>;
+  put: UseMutationResult<IFetchResponse, Error, T>;
+  delete: UseMutationResult<IFetchResponse, Error, T>;
 }
 
 export function useDataMutation<T>(
   url: string,
   headers?: HeadersInit,
-  options?: UseMutationOptions<FetchResponse, Error, T>
+  options?: UseMutationOptions<IFetchResponse, Error, RequestVariables<T>>
 ): {
-  mutateInstance: MutateInstance<T>;
+  mutateInstance: IMutateInstance<RequestVariables<T>>;
 } {
   const { fetchInstance } = useFetch();
 
-  const [mutateInstance] = useState<MutateInstance<T>>({
-    post: useMutation<FetchResponse, Error, T>({
+  const [mutateInstance] = useState<IMutateInstance<RequestVariables<T>>>({
+    post: useMutation<IFetchResponse, Error, RequestVariables<T>>({
       ...options,
-      mutationFn: (variables: T) =>
-        fetchInstance.post(url, JSON.stringify(variables), headers),
+      mutationFn: (variables: RequestVariables<T>) =>
+        fetchInstance.post(
+          url,
+          JSON.stringify(variables?.body || ""),
+          variables.headersInit || headers
+        ),
     }),
-    put: useMutation<FetchResponse, Error, T>({
+    put: useMutation<IFetchResponse, Error, RequestVariables<T>>({
       ...options,
-      mutationFn: (variables: T) =>
-        fetchInstance.put(url, JSON.stringify(variables), headers),
+      mutationFn: (variables: RequestVariables<T>) =>
+        fetchInstance.put(
+          url,
+          JSON.stringify(variables?.body || ""),
+          variables.headersInit || headers
+        ),
     }),
-    delete: useMutation<FetchResponse, Error, T>({
+    delete: useMutation<IFetchResponse, Error, RequestVariables<T>>({
       ...options,
-      mutationFn: () => fetchInstance.delete(url, headers),
+      mutationFn: (variables: RequestVariables<T>) =>
+        fetchInstance.delete(url, variables.headersInit || headers),
     }),
   });
 

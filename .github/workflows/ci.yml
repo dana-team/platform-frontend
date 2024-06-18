@@ -5,7 +5,12 @@ on:
     branches:
       - main
       - release-*
-  pull_request: {}
+      - feature/*
+  pull_request:
+    branches:
+      - main
+      - release-*
+      - feature/*
   workflow_dispatch: {}
 
 jobs:
@@ -53,6 +58,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm run ci
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:

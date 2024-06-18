@@ -1,12 +1,11 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import { useRouter } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/useAuth";
 import { useDataMutation } from "@/hooks/useDataMutation";
-import { User } from "@/models/user/user";
-import { AuthData } from "@/models/auth/authData";
+import { IUser } from "@models/user/user";
+import { IUserCredentials } from "@models/user/userCredentials";
 
-interface UseLoginResult {
+interface IUseLoginResult {
   register: ReturnType<typeof useForm>["register"];
   handleSubmit: ReturnType<typeof useForm>["handleSubmit"];
   formErrors: ReturnType<typeof useForm>["formState"]["errors"];
@@ -14,8 +13,7 @@ interface UseLoginResult {
   error: string | null;
 }
 
-export const useLogin = (): UseLoginResult => {
-  const router = useRouter();
+export const useLogin = (): IUseLoginResult => {
   const { signIn } = useAuth();
   const [error, setError] = useState<string | null>(null);
 
@@ -25,24 +23,25 @@ export const useLogin = (): UseLoginResult => {
     handleSubmit,
   } = useForm();
 
-  const { mutateInstance: mutate } = useDataMutation<User>("/auth", undefined, {
-    onSuccess: async (response, user) => {
-      const authData: AuthData = AuthData.fromJson(
-        response.body as { token: string; user: string }
-      );
-      if (authData && authData.token) {
-        signIn(authData.token, user.username);
-        router.invalidate();
-      }
-    },
-    onError: (error) => setError(error.message),
-  });
+  const { mutateInstance: mutate } = useDataMutation<IUser>(
+    "/auth",
+    undefined,
+    {
+      onSuccess: async (response, user) => {
+        const data = response.body as IUserCredentials;
+        if (data && data.token) {
+          signIn(data.token, user.username);
+        }
+      },
+      onError: (error) => setError(error.message),
+    }
+  );
 
   const onSubmit: SubmitHandler<FieldValues> = async ({
     username,
     password,
   }) => {
-    await mutate.post.mutateAsync(User.fromJson({ username, password }));
+    await mutate.post.mutateAsync({ username, password });
   };
 
   return {

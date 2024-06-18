@@ -46,6 +46,7 @@ const Login: React.FC = () => {
                 />
                 <Input
                   type="password"
+                  autoComplete="password"
                   {...register("password", {
                     required: "password is required",
                     minLength: {

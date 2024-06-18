@@ -1,42 +1,51 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "./useAuth";
 import { API_URL } from "@common/consts";
+import { IFetchResponse } from "@models/response/response";
 import { FetchResponse } from "@models/response/response";
 
 type body = string | null | undefined;
-export interface FetchInstance {
-  get: (url: string, headers?: HeadersInit) => Promise<FetchResponse>;
+export interface IFetch {
+  get: (url: string, headers?: HeadersInit) => Promise<IFetchResponse>;
   post: (
     url: string,
     body: body,
     headers?: HeadersInit
-  ) => Promise<FetchResponse>;
+  ) => Promise<IFetchResponse>;
   put: (
     url: string,
     body: body,
     headers?: HeadersInit
-  ) => Promise<FetchResponse>;
-  delete: (url: string, headers?: HeadersInit) => Promise<FetchResponse>;
+  ) => Promise<IFetchResponse>;
+  delete: (url: string, headers?: HeadersInit) => Promise<IFetchResponse>;
 }
 
 const fetchHandler = async (
   url: string,
   options: RequestInit
-): Promise<FetchResponse> => {
-  const response = await fetch(url, options);
-  const data = await response.json();
+): Promise<IFetchResponse> => {
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
 
-  if (!response.ok) {
-    if (data && typeof data === "object" && "message" in data) {
-      throw new Error(data.message || "Error message not found");
+    if (!response.ok) {
+      if (data && typeof data === "object" && "message" in data) {
+        throw new Error(data.message || "Error message not found");
+      }
+      throw new Error("Unknown error occurred");
     }
-    throw new Error("Unknown error occurred");
-  }
 
-  return new FetchResponse(response, data);
+    return new FetchResponse(response, data);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Fetch Error: ${error.message}`);
+    } else {
+      throw new Error(`Fetch Error: ${String(error)}`);
+    }
+  }
 };
 
-const fetchInstance: FetchInstance = {
+const fetchInstance: IFetch = {
   get: async (url, headers) => fetchHandler(url, { method: "GET", headers }),
   post: async (url, body, headers) =>
     fetchHandler(url, { method: "POST", body, headers }),
@@ -46,7 +55,7 @@ const fetchInstance: FetchInstance = {
     fetchHandler(url, { method: "DELETE", headers }),
 };
 
-export const useFetch = (): { fetchInstance: FetchInstance } => {
+export const useFetch = (): { fetchInstance: IFetch } => {
   const { token, isAuthenticated } = useAuth();
   const [instance, setInstance] = useState(fetchInstance);
 

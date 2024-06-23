@@ -161,9 +161,11 @@ export default {
     extend: {
       padding: {
         0.75: "3px",
+        1.25: "5px",
         2.25: "9px",
         4.25: "17px",
         5.5: "22px",
+        7.5: "30px",
       },
       backgroundImage: {
         "login-pattern": "url('/public/login-background.png')",
@@ -176,19 +178,23 @@ export default {
         18: "66px",
         35: "140px",
         65: "262px",
+        100: "421px",
         150: "620px",
       },
       height: {
         13: "52px",
         17: "70px",
+        25: "106px",
         85: "330px",
       },
       colors: {
         "mono/basic": {
           1: "#FFFFFF",
+          2: "#DEE4EA",
           4: "#B6C2CF",
           3: "#C7D1DB",
           5: "#9FADBC",
+          7: "#738496",
           8: "#596773",
           9: "#454F59",
           10: "#38414A",

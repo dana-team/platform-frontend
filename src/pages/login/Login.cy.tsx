@@ -10,7 +10,7 @@ describe("Login Component", () => {
     cy.mount(
       <QueryClientProvider client={queryClient}>
         <Login />
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
   });
 
@@ -27,7 +27,7 @@ describe("Login Component", () => {
     cy.get('input[placeholder="Insert username..."]').type("testuser");
     cy.get('input[placeholder="Insert username..."]').should(
       "have.value",
-      "testuser",
+      "testuser"
     );
   });
 
@@ -35,7 +35,7 @@ describe("Login Component", () => {
     cy.get('input[placeholder="Insert password..."]').type("password123");
     cy.get('input[placeholder="Insert password..."]').should(
       "have.value",
-      "password123",
+      "password123"
     );
   });
 

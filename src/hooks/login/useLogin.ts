@@ -1,12 +1,9 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import { useRouter } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/useAuth";
 import { useDataMutation } from "@/hooks/useDataMutation";
-import { User } from "@/models/user/user";
-import { AuthData } from "@/models/auth/authData";
 
-interface UseLoginResult {
+interface IUseLoginResult {
   register: ReturnType<typeof useForm>["register"];
   handleSubmit: ReturnType<typeof useForm>["handleSubmit"];
   formErrors: ReturnType<typeof useForm>["formState"]["errors"];
@@ -14,10 +11,10 @@ interface UseLoginResult {
   error: string | null;
 }
 
-export const useLogin = (): UseLoginResult => {
-  const router = useRouter();
+export const useLogin = (): IUseLoginResult => {
   const { signIn } = useAuth();
   const [error, setError] = useState<string | null>(null);
+  const [username, setUsername] = useState("");
 
   const {
     register,
@@ -25,14 +22,13 @@ export const useLogin = (): UseLoginResult => {
     handleSubmit,
   } = useForm();
 
-  const { mutateInstance: mutate } = useDataMutation<User>("/auth", undefined, {
-    onSuccess: async (response, user) => {
-      const authData: AuthData = AuthData.fromJson(
-        response.body as { token: string; user: string }
-      );
+  const { mutateInstance: mutate } = useDataMutation("/login", undefined, {
+    onSuccess: async (response) => {
+      const authData = response.body as { token: string; user: string };
       if (authData && authData.token) {
-        signIn(authData.token, user.username);
-        router.invalidate();
+        signIn(authData.token, username);
+      } else {
+        throw new Error("No token provided");
       }
     },
     onError: (error) => setError(error.message),
@@ -42,7 +38,12 @@ export const useLogin = (): UseLoginResult => {
     username,
     password,
   }) => {
-    await mutate.post.mutateAsync(User.fromJson({ username, password }));
+    setUsername(username);
+    await mutate.post.mutateAsync({
+      headersInit: {
+        Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+      },
+    });
   };
 
   return {

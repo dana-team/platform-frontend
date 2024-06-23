@@ -10,7 +10,7 @@ describe("NotFound Component", () => {
     cy.get("h1").contains("404").should("exist");
 
     cy.contains("The page you are looking for may have been moved,").should(
-      "exist",
+      "exist"
     );
     cy.contains("deleted, or possibly never existed").should("exist");
   });
@@ -22,7 +22,7 @@ describe("NotFound Component", () => {
       .last()
       .should(
         "have.class",
-        "bg-cover bg-no-repeat bg-login-pattern opacity-20",
+        "bg-cover bg-no-repeat bg-login-pattern opacity-20"
       );
   });
 });

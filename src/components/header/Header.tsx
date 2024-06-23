@@ -8,6 +8,7 @@ import { APP_NAME } from "@/common/consts";
 import { useAuth } from "@/hooks/useAuth";
 import getFirstLetter from "@utils/getFirstLetter";
 import { dynamicThumbnailLoader } from "@utils/dynamicComponentLoader";
+import { useQueryClient } from "@tanstack/react-query";
 
 type HeaderProps = {
   breadcrumbs: BreadcrumbItem[];
@@ -17,9 +18,10 @@ type HeaderProps = {
 const Header = React.memo(({ breadcrumbs, user }: HeaderProps) => {
   const { signOut, thumbnail } = useAuth();
   const getFirstLetterOfUser = useCallback(() => getFirstLetter(user), [user]);
+  const queryClient = useQueryClient();
 
   return (
-    <div className="w-full text-left bg-mono/basic-16 h-17 items-center justify-between gap-4 flex">
+    <div className="w-full text-left bg-mono/basic-16 h-full items-center justify-between gap-4 flex">
       <nav aria-label="breadcrumb">
         <div className="flex w-fit flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 py-2 pl-5.5">
           <Typography>
@@ -56,6 +58,7 @@ const Header = React.memo(({ breadcrumbs, user }: HeaderProps) => {
           className="group flex items-center cursor-pointer"
           onClick={() => {
             signOut();
+            queryClient.removeQueries();
           }}
         >
           <Typography

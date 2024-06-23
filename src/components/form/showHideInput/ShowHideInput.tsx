@@ -7,8 +7,10 @@ type ShowHideInputProps = {
   setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ShowHideInput: React.FC<ShowHideInputProps> = ({ showPassword, setShowPassword }) => {
-
+const ShowHideInput: React.FC<ShowHideInputProps> = ({
+  showPassword,
+  setShowPassword,
+}) => {
   return (
     <div
       className="absolute top-0 right-0 h-full flex items-center pr-3 cursor-pointer"

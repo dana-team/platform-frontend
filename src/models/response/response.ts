@@ -1,4 +1,11 @@
-export class FetchResponse {
+export interface IFetchResponse {
+  status: number;
+  headers: Headers;
+  ok: boolean;
+  body: object;
+}
+
+export class FetchResponse implements IFetchResponse {
   public status: number;
   public headers: Headers;
   public ok: boolean;

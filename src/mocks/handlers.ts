@@ -1,5 +1,8 @@
 import { http, HttpHandler, HttpResponse } from "msw";
+import { projectsHandlers } from "./handlers/projects";
 import { API_URL } from "@common/consts";
+import { hierarchiesHandlers } from "./handlers/hierarchies";
+import { applicationHandlers } from "./handlers/applications";
 
 const containersHandlers: HttpHandler[] = [
   http.get(
@@ -12,6 +15,29 @@ const containersHandlers: HttpHandler[] = [
       });
     }
   ),
+];
+
+const namespacesHandlers: HttpHandler[] = [
+  http.get(`${API_URL}/namespaces`, () => {
+    return HttpResponse.json({
+      namespaces: ["namespace1", "namespace2", "namespace3"],
+      count: 3,
+    });
+  }),
+  http.get(`${API_URL}/namespaces/:namespace`, () => {
+    return HttpResponse.json({
+      namespace: "namespace",
+    });
+  }),
+  http.post(`${API_URL}/namespaces`, async ({ request }) => {
+    const requestData = await request.json();
+    console.log(
+      `POST namespaces sent , request:  ${JSON.stringify(requestData)}`
+    );
+    return HttpResponse.json({
+      namespace: "namespace",
+    });
+  }),
 ];
 
 const secretsHandlers: HttpHandler[] = [
@@ -61,17 +87,22 @@ const secretsHandlers: HttpHandler[] = [
 ];
 
 const authHandlers: HttpHandler[] = [
-  http.post(`${API_URL}/auth`, async ({ request }) => {
-    const requestData = await request.json();
-    console.log(`POST auth sent , request:  ${JSON.stringify(requestData)}`);
-    return HttpResponse.json(
-      {
-        user: "Dana Israeli",
-        token: "bbsssisqsoiqoiiihbcbbbdwwwwwwwnnnwwwnmnsskksks",
-        message: "unauthorized user",
-      }
-      // { status: 401 }
-    );
+  http.post(`${API_URL}/login`, async ({ request }) => {
+    const token = request.headers.get("Authorization");
+    if (!token) {
+      return HttpResponse.json(
+        { message: "unauthorized user" },
+        { status: 401 }
+      );
+    }
+    const base64UserCreds = token.split(" ")[1];
+    const userCreds = atob(base64UserCreds);
+    const username = userCreds.split(":")[0];
+
+    console.log(username + " logged in!");
+    return HttpResponse.json({
+      token: "bbsssisqsoiqoiiihbcbbbdwwwwwwwnnnwwwnmnsskksks",
+    });
   }),
 ];
 
@@ -79,6 +110,10 @@ export const handlers: HttpHandler[] = [
   ...containersHandlers,
   ...secretsHandlers,
   ...authHandlers,
+  ...namespacesHandlers,
+  ...projectsHandlers,
+  ...hierarchiesHandlers,
+  ...applicationHandlers,
   http.get("/posts", () => {
     console.log('Captured a "GET /posts" request');
     return HttpResponse.json({

@@ -2,8 +2,6 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useDataMutation } from "@/hooks/useDataMutation";
-import { IUser } from "@models/user/user";
-import { IUserCredentials } from "@models/user/userCredentials";
 
 interface IUseLoginResult {
   register: ReturnType<typeof useForm>["register"];
@@ -16,6 +14,7 @@ interface IUseLoginResult {
 export const useLogin = (): IUseLoginResult => {
   const { signIn } = useAuth();
   const [error, setError] = useState<string | null>(null);
+  const [username, setUsername] = useState("");
 
   const {
     register,
@@ -23,25 +22,28 @@ export const useLogin = (): IUseLoginResult => {
     handleSubmit,
   } = useForm();
 
-  const { mutateInstance: mutate } = useDataMutation<IUser>(
-    "/auth",
-    undefined,
-    {
-      onSuccess: async (response, user) => {
-        const data = response.body as IUserCredentials;
-        if (data && data.token) {
-          signIn(data.token, user.username);
-        }
-      },
-      onError: (error) => setError(error.message),
-    }
-  );
+  const { mutateInstance: mutate } = useDataMutation("/login", undefined, {
+    onSuccess: async (response) => {
+      const authData = response.body as { token: string; user: string };
+      if (authData && authData.token) {
+        signIn(authData.token, username);
+      } else {
+        throw new Error("No token provided");
+      }
+    },
+    onError: (error) => setError(error.message),
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = async ({
     username,
     password,
   }) => {
-    await mutate.post.mutateAsync({ username, password });
+    setUsername(username);
+    await mutate.post.mutateAsync({
+      headersInit: {
+        Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+      },
+    });
   };
 
   return {

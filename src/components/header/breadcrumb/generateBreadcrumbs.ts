@@ -9,10 +9,12 @@ export const generateBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
 
   const breadcrumbs: (BreadcrumbItem | null)[] = pathSegments.map(
     (segment, index) => {
+      const decodedSegment = decodeURIComponent(segment);
+
       if (index === 1) {
-        return { text: segment, isDropdown: true };
+        return { text: decodedSegment, isDropdown: true };
       } else if (index === 3) {
-        return { text: segment, shouldAddDivider: true };
+        return { text: decodedSegment, shouldAddDivider: true };
       }
       return null;
     }

@@ -86,17 +86,22 @@ const secretsHandlers: HttpHandler[] = [
 ];
 
 const authHandlers: HttpHandler[] = [
-  http.post(`${API_URL}/auth`, async ({ request }) => {
-    const requestData = await request.json();
-    console.log(`POST auth sent , request:  ${JSON.stringify(requestData)}`);
-    return HttpResponse.json(
-      {
-        user: "Dana Israeli",
-        token: "bbsssisqsoiqoiiihbcbbbdwwwwwwwnnnwwwnmnsskksks",
-        message: "unauthorized user",
-      }
-      // { status: 401 }
-    );
+  http.post(`${API_URL}/login`, async ({ request }) => {
+    const token = request.headers.get("Authorization");
+    if (!token) {
+      return HttpResponse.json(
+        { message: "unauthorized user" },
+        { status: 401 }
+      );
+    }
+    const base64UserCreds = token.split(" ")[1];
+    const userCreds = atob(base64UserCreds);
+    const username = userCreds.split(":")[0];
+
+    console.log(username + " logged in!");
+    return HttpResponse.json({
+      token: "bbsssisqsoiqoiiihbcbbbdwwwwwwwnnnwwwnmnsskksks",
+    });
   }),
 ];
 

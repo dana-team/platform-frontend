@@ -50,7 +50,7 @@ export const usePostProject = (): IUsePostProjectResult => {
   );
 
   const onSubmit: SubmitHandler<FieldValues> = async ({ name, hierarchy }) => {
-    await mutate.post.mutateAsync({ name, hierarchy });
+    await mutate.post.mutateAsync({ body: { name, hierarchy } });
   };
 
   return {

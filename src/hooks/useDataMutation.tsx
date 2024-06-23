@@ -7,6 +7,11 @@ import { useState } from "react";
 import { useFetch } from "@hooks/useFetch";
 import { IFetchResponse } from "@models/response/response";
 
+type RequestVariables<T> = {
+  body?: T;
+  headersInit?: HeadersInit;
+};
+
 export interface IMutateInstance<T> {
   post: UseMutationResult<IFetchResponse, Error, T>;
   put: UseMutationResult<IFetchResponse, Error, T>;
@@ -16,26 +21,35 @@ export interface IMutateInstance<T> {
 export function useDataMutation<T>(
   url: string,
   headers?: HeadersInit,
-  options?: UseMutationOptions<IFetchResponse, Error, T>
+  options?: UseMutationOptions<IFetchResponse, Error, RequestVariables<T>>
 ): {
-  mutateInstance: IMutateInstance<T>;
+  mutateInstance: IMutateInstance<RequestVariables<T>>;
 } {
   const { fetchInstance } = useFetch();
 
-  const [mutateInstance] = useState<IMutateInstance<T>>({
-    post: useMutation<IFetchResponse, Error, T>({
+  const [mutateInstance] = useState<IMutateInstance<RequestVariables<T>>>({
+    post: useMutation<IFetchResponse, Error, RequestVariables<T>>({
       ...options,
-      mutationFn: (variables: T) =>
-        fetchInstance.post(url, JSON.stringify(variables), headers),
+      mutationFn: (variables: RequestVariables<T>) =>
+        fetchInstance.post(
+          url,
+          JSON.stringify(variables?.body || ""),
+          variables.headersInit || headers
+        ),
     }),
-    put: useMutation<IFetchResponse, Error, T>({
+    put: useMutation<IFetchResponse, Error, RequestVariables<T>>({
       ...options,
-      mutationFn: (variables: T) =>
-        fetchInstance.put(url, JSON.stringify(variables), headers),
+      mutationFn: (variables: RequestVariables<T>) =>
+        fetchInstance.put(
+          url,
+          JSON.stringify(variables?.body || ""),
+          variables.headersInit || headers
+        ),
     }),
-    delete: useMutation<IFetchResponse, Error, T>({
+    delete: useMutation<IFetchResponse, Error, RequestVariables<T>>({
       ...options,
-      mutationFn: () => fetchInstance.delete(url, headers),
+      mutationFn: (variables: RequestVariables<T>) =>
+        fetchInstance.delete(url, variables.headersInit || headers),
     }),
   });
 

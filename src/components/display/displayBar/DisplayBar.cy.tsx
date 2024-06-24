@@ -1,20 +1,23 @@
 import "@index.css";
 import DisplayBar from "./DisplayBar";
+import Button from "@components/button/Button";
 
 describe("DisplayBar Component", () => {
   beforeEach(() => {
     const setSearch = cy.stub().as("setSearch");
     const setDisplayGrid = cy.stub().as("setDisplayGrid");
-    const setShowModal = cy.stub().as("setShowModal");
 
     cy.mount(
       <DisplayBar
         setSearch={setSearch}
         setDisplayGrid={setDisplayGrid}
-        setShowModal={setShowModal}
+        button={
+          <Button variant="primary" className="max-h-min truncate">
+            Add
+          </Button>
+        }
         isDisplayGrid={false}
         success={true}
-        button="Add"
       />
     );
   });
@@ -33,11 +36,6 @@ describe("DisplayBar Component", () => {
   it("Toggles display list on click", () => {
     cy.get(".rounded-r-lg").click();
     cy.get("@setDisplayGrid").should("have.been.calledOnce");
-  });
-
-  it("Opens modal on add button click", () => {
-    cy.contains("Add").click();
-    cy.get("@setShowModal").should("have.been.calledOnce");
   });
 
   it("Sets search on input type", () => {

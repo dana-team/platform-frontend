@@ -85,6 +85,7 @@ export const useFetch = (): { fetchInstance: IFetch } => {
           ...headers,
         }),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, backendUrl]);
 
   return { fetchInstance: instance };

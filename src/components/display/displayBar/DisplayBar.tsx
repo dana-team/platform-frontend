@@ -1,28 +1,24 @@
 /// <reference types="vite-plugin-svgr/client" />
-import Plus from "@/assets/plus.svg?react";
 import Grid from "@/assets/grid.svg?react";
 import Union from "@/assets/union.svg?react";
 import Rectangle from "@/assets/rectangle2.svg?react";
-import React from "react";
+import React, { ReactNode } from "react";
 import SearchBox from "@components/searchBox/SearchBox";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import Typography from "@components/typography/Typography";
 import { useSearchProjects } from "@hooks/search/useSearch";
-import Button from "@components/button/Button";
 
 type DisplayBarProps = {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   setDisplayGrid: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isDisplayGrid: boolean;
   success: boolean;
-  button: string;
+  button: ReactNode;
 };
 
 const DisplayBar = React.memo(
   ({
     setDisplayGrid,
-    setShowModal,
     isDisplayGrid,
     success,
     setSearch,
@@ -64,14 +60,7 @@ const DisplayBar = React.memo(
           <Typography className="px-3">
             <Rectangle />
           </Typography>
-          <Button
-            variant="primary"
-            icon={<Plus />}
-            className="max-h-min truncate"
-            onClick={() => setShowModal((prev) => !prev)}
-          >
-            {button}
-          </Button>
+          {button}
         </div>
       </div>
     );

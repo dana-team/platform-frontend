@@ -14,6 +14,8 @@ import NoProjects from "@components/projects/noProjects/NoProjects";
 import { useProjects } from "@hooks/projects/useProjects";
 import { PROJECTS_PAGE_SIZE } from "@common/consts";
 import NoSearchResults from "@components/projects/noSearchResults/NoSearchResults";
+import Button from "@components/button/Button";
+import Plus from "@/assets/plus.svg?react";
 
 const ProjectsOverview: React.FC = React.memo(() => {
   const [isDisplayGrid, setDisplayGrid] = useState(true);
@@ -29,7 +31,7 @@ const ProjectsOverview: React.FC = React.memo(() => {
     isSuccess,
     isLoading,
     setSearch,
-    search, 
+    search,
   } = useProjects();
 
   const ProjectDisplay = isDisplayGrid ? DisplayGrid : DisplayList;
@@ -46,10 +48,18 @@ const ProjectsOverview: React.FC = React.memo(() => {
           <DisplayBar
             success={isSuccess}
             isDisplayGrid={isDisplayGrid}
-            setShowModal={setShowModal}
             setDisplayGrid={setDisplayGrid}
             setSearch={setSearch}
-            button="Add new project"
+            button={
+              <Button
+                variant="primary"
+                icon={<Plus />}
+                className="max-h-min truncate"
+                onClick={() => setShowModal((prev) => !prev)}
+              >
+                Add a new project
+              </Button>
+            }
           />
         </div>
         {isLoading ? (

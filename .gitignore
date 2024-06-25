@@ -28,3 +28,4 @@ coverage
 rename.sh
 
 .env
+cypress/downloads/*

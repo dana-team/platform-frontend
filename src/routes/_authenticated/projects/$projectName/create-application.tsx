@@ -1,4 +1,4 @@
-import CreateApplication from "@pages/applications/CreateApplication";
+import CreateApplication from "@pages/applications/create/CreateApplication";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(

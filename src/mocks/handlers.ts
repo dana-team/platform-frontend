@@ -2,6 +2,7 @@ import { http, HttpHandler, HttpResponse } from "msw";
 import { projectsHandlers } from "./handlers/projects";
 import { API_URL } from "@common/consts";
 import { hierarchiesHandlers } from "./handlers/hierarchies";
+import { applicationHandlers } from "./handlers/applications";
 
 const containersHandlers: HttpHandler[] = [
   http.get(
@@ -112,6 +113,7 @@ export const handlers: HttpHandler[] = [
   ...namespacesHandlers,
   ...projectsHandlers,
   ...hierarchiesHandlers,
+  ...applicationHandlers,
   http.get("/posts", () => {
     console.log('Captured a "GET /posts" request');
     return HttpResponse.json({

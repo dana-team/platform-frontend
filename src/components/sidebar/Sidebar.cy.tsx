@@ -7,7 +7,7 @@ describe("SideBar component", () => {
   beforeEach(() => {
     cy.mount(
       <TestRouter>
-        <SideBar currentPath="/projects/myproject" />{" "}
+        <SideBar currentPath="/projects/myproject" />
       </TestRouter>
     );
   });

@@ -11,6 +11,7 @@ const mount = () => {
     </QueryClientProvider>
   );
 };
+
 describe("ProjectsOverview Component", () => {
   it("renders ProjectsOverview correctly", () => {
     cy.intercept("GET", "/projects/1", {

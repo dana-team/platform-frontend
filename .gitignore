@@ -30,3 +30,4 @@ rename.sh
 .env
 *storybook.log
 cypress/downloads/*
+

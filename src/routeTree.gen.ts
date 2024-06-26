@@ -21,6 +21,7 @@ import { Route as AuthenticatedProjectsProjectNameIndexImport } from './routes/_
 import { Route as AuthenticatedProjectsProjectNameSettingsImport } from './routes/_authenticated/projects/$projectName/settings'
 import { Route as AuthenticatedProjectsProjectNameSecretsImport } from './routes/_authenticated/projects/$projectName/secrets'
 import { Route as AuthenticatedProjectsProjectNameMembersImport } from './routes/_authenticated/projects/$projectName/members'
+import { Route as AuthenticatedProjectsProjectNameCreateApplicationImport } from './routes/_authenticated/projects/$projectName/create-application'
 import { Route as AuthenticatedProjectsProjectNameApplicationsIndexImport } from './routes/_authenticated/projects/$projectName/applications/index'
 import { Route as AuthenticatedProjectsProjectNameApplicationsApplicationNameImport } from './routes/_authenticated/projects/$projectName/applications/$applicationName'
 import { Route as AuthenticatedProjectsProjectNameApplicationsApplicationNameIndexImport } from './routes/_authenticated/projects/$projectName/applications/$applicationName/index'
@@ -81,6 +82,12 @@ const AuthenticatedProjectsProjectNameSecretsRoute =
 const AuthenticatedProjectsProjectNameMembersRoute =
   AuthenticatedProjectsProjectNameMembersImport.update({
     path: '/members',
+    getParentRoute: () => AuthenticatedProjectsProjectNameRoute,
+  } as any)
+
+const AuthenticatedProjectsProjectNameCreateApplicationRoute =
+  AuthenticatedProjectsProjectNameCreateApplicationImport.update({
+    path: '/create-application',
     getParentRoute: () => AuthenticatedProjectsProjectNameRoute,
   } as any)
 
@@ -151,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProjectsIndexImport
       parentRoute: typeof AuthenticatedProjectsImport
     }
+    '/_authenticated/projects/$projectName/create-application': {
+      id: '/_authenticated/projects/$projectName/create-application'
+      path: '/create-application'
+      fullPath: '/projects/$projectName/create-application'
+      preLoaderRoute: typeof AuthenticatedProjectsProjectNameCreateApplicationImport
+      parentRoute: typeof AuthenticatedProjectsProjectNameImport
+    }
     '/_authenticated/projects/$projectName/members': {
       id: '/_authenticated/projects/$projectName/members'
       path: '/members'
@@ -211,6 +225,7 @@ export const routeTree = rootRoute.addChildren({
     AuthenticatedProjectsRoute: AuthenticatedProjectsRoute.addChildren({
       AuthenticatedProjectsProjectNameRoute:
         AuthenticatedProjectsProjectNameRoute.addChildren({
+          AuthenticatedProjectsProjectNameCreateApplicationRoute,
           AuthenticatedProjectsProjectNameMembersRoute,
           AuthenticatedProjectsProjectNameSecretsRoute,
           AuthenticatedProjectsProjectNameSettingsRoute,
@@ -266,6 +281,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_authenticated/projects/$projectName.tsx",
       "parent": "/_authenticated/projects",
       "children": [
+        "/_authenticated/projects/$projectName/create-application",
         "/_authenticated/projects/$projectName/members",
         "/_authenticated/projects/$projectName/secrets",
         "/_authenticated/projects/$projectName/settings",
@@ -277,6 +293,10 @@ export const routeTree = rootRoute.addChildren({
     "/_authenticated/projects/": {
       "filePath": "_authenticated/projects/index.tsx",
       "parent": "/_authenticated/projects"
+    },
+    "/_authenticated/projects/$projectName/create-application": {
+      "filePath": "_authenticated/projects/$projectName/create-application.tsx",
+      "parent": "/_authenticated/projects/$projectName"
     },
     "/_authenticated/projects/$projectName/members": {
       "filePath": "_authenticated/projects/$projectName/members.tsx",

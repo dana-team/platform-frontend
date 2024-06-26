@@ -11,6 +11,7 @@ const mount = () => {
     </QueryClientProvider>
   );
 };
+
 describe("ProjectsOverview Component", () => {
   it("renders ProjectsOverview correctly", () => {
     cy.intercept("GET", "/projects/1", {
@@ -22,7 +23,7 @@ describe("ProjectsOverview Component", () => {
 
     mount();
     cy.contains("Projects Overview").should("exist");
-    cy.contains("Add new project").should("exist");
+    cy.contains("Add a new project").should("exist");
   });
 
   it("shows loading spinner", () => {
@@ -58,7 +59,7 @@ describe("ProjectsOverview Component", () => {
     });
 
     mount();
-    cy.contains("Add new project").click();
+    cy.contains("Add a new project").click();
     cy.get(".h-85.w-150").should("exist");
   });
 });

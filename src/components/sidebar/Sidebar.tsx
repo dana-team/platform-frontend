@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarProps> = React.memo(
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     return (
       <div
-        className={`top-0 left-0 flex-none transition-all duration-500 ${
+        className={`top-0 left-0 flex-none transition-all duration-500 h-full ${
           isSidebarExpanded ? "w-65" : "w-18"
         }`}
         onDoubleClick={() => setIsSidebarExpanded((prev) => !prev)}

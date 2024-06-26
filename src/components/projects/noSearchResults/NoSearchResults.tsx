@@ -14,7 +14,7 @@ const NoSearchResults = ({ className, search }: NoSearchResultsProps) => {
         No Results Found for: {search}
       </Typography>
       <Typography variant="body-xl" className="text-[#6E6E6E]">
-        We couldn't find any projects matching your search criteria. Try
+        We couldn't find any results matching your search criteria. Try
         adjusting
       </Typography>
       <Typography variant="body-xl" className="text-[#6E6E6E] mb-5">

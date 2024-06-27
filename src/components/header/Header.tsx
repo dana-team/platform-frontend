@@ -35,12 +35,12 @@ const Header = React.memo(({ breadcrumbs, user }: HeaderProps) => {
           </Typography>
           <div className="flex cursor-pointer items-center antialiased transition-colors duration-100 bg-mono/basic-14 rounded-full h-fit">
             <div className="flex items-center py-2.25 pl-4 pr-5">
-              {breadcrumbs.map((breadcrumb) => (
+              {breadcrumbs.map((breadcrumb, index) => (
                 <Breadcrumb
+                  key={index}
                   text={breadcrumb.text}
                   isDropdown={breadcrumb.isDropdown}
                   shouldAddDivider={breadcrumb.shouldAddDivider}
-                  key={breadcrumb.text}
                 />
               ))}
             </div>

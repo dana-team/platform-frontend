@@ -19,7 +19,6 @@ export const generateBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
       return null;
     }
   );
-
   return breadcrumbs.filter(
     (breadcrumb): breadcrumb is BreadcrumbItem => breadcrumb !== null
   );

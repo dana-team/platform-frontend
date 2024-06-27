@@ -1,14 +1,10 @@
 /// <reference types="vite-plugin-svgr/client" />
-import React, { useCallback } from "react";
+import React from "react";
 import AppIcon from "@/assets/app-icon.svg?react";
-import ArrowDown from "@/assets/arrow-down.svg?react";
 import Typography from "@/components/typography/Typography";
 import Breadcrumb, { BreadcrumbItem } from "./breadcrumb/Breadcrumb";
 import { APP_NAME } from "@/common/consts";
-import { useAuth } from "@/hooks/useAuth";
-import getFirstLetter from "@utils/getFirstLetter";
-import { dynamicThumbnailLoader } from "@utils/dynamicComponentLoader";
-import { useQueryClient } from "@tanstack/react-query";
+import UserPopover from "./popover/UserPopover";
 
 type HeaderProps = {
   breadcrumbs: BreadcrumbItem[];
@@ -16,10 +12,6 @@ type HeaderProps = {
 };
 
 const Header = React.memo(({ breadcrumbs, user }: HeaderProps) => {
-  const { signOut, thumbnail } = useAuth();
-  const getFirstLetterOfUser = useCallback(() => getFirstLetter(user), [user]);
-  const queryClient = useQueryClient();
-
   return (
     <div className="w-full text-left bg-mono/basic-16 h-full items-center justify-between gap-4 flex">
       <nav aria-label="breadcrumb">
@@ -47,31 +39,7 @@ const Header = React.memo(({ breadcrumbs, user }: HeaderProps) => {
           </div>
         </div>
       </nav>
-      <div className="place-self-end flex items-center h-full pr-5.5">
-        <div className="relative flex justify-center items-center">
-          {dynamicThumbnailLoader(thumbnail)}
-          <div className="text-white absolute inset-0 flex justify-center items-center">
-            {getFirstLetterOfUser().toUpperCase()}
-          </div>
-        </div>
-        <div
-          className="group flex items-center cursor-pointer"
-          onClick={() => {
-            signOut();
-            queryClient.removeQueries();
-          }}
-        >
-          <Typography
-            variant="body-md"
-            className="text-mono/basic-4 pl-3 group-hover-white"
-          >
-            {user}
-          </Typography>
-          <Typography className="text-mono/basic-4 group-hover-white">
-            <ArrowDown />
-          </Typography>
-        </div>
-      </div>
+      <UserPopover user={user} />
     </div>
   );
 });

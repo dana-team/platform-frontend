@@ -2,26 +2,18 @@
 import Thumbnail from "@/assets/account-thumbnails/color-3.svg?react";
 import Typography from "@components/typography/Typography";
 import React from "react";
-import { MenuItem } from "@components/menu/items";
 import Card from "@components/card/Card";
+import ProjectMenuItems from "../ProjectMenu";
 
 interface ProjectCardProps {
   name: string;
   hierarchy: string;
 }
 
-const menuItems: (name: string) => MenuItem[] = (projectName) => [
-  { label: "view applications", path: `${projectName}/applications` },
-  { label: "members", path: `${projectName}/members` },
-  { label: "secrets", path: `${projectName}/secrets` },
-  { label: "divider", path: "" },
-  { label: "settings", path: `${projectName}/settings` },
-];
-
 const ProjectCard: React.FC<ProjectCardProps> = React.memo(
   ({ name, hierarchy }: ProjectCardProps) => {
     return (
-      <Card menuItems={menuItems(name)}>
+      <Card menuChildren={<ProjectMenuItems projectName={name} />}>
         <div className="flex flex-row">
           <div className="relative flex justify-center items-center">
             <Thumbnail />

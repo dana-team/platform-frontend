@@ -1,12 +1,12 @@
 /// <reference types="vite-plugin-svgr/client" />
 import Thumbnail from "@/assets/account-thumbnails/color-3.svg?react";
 import Typography from "@components/typography/Typography";
-import React, { useMemo } from "react";
+import React from "react";
 import Row from "@components/table/row/Row";
 import OpenLink from "@/assets/open-link.svg?react";
 import Docker from "@/assets/icon-container.svg?react";
 import Button from "@components/button/Button";
-import { menuItems } from "../menuItems";
+import CappMenuItems from "../CappMenuItems";
 
 type CappRowProps = {
   projectName: string;
@@ -17,12 +17,12 @@ type CappRowProps = {
 
 const CappRow = React.memo(
   ({ projectName, cappName, cappSource, deployment }: CappRowProps) => {
-    const items = useMemo(
-      () => menuItems(projectName, cappName),
-      [projectName, cappName]
-    );
     return (
-      <Row menuItems={items}>
+      <Row
+        menuChildren={
+          <CappMenuItems projectName={projectName} applicationName={cappName} />
+        }
+      >
         <div className="relative flex justify-center items-center">
           <Thumbnail />
           <div className="text-white absolute inset-0 flex justify-center items-center">

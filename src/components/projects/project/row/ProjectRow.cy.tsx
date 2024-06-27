@@ -3,11 +3,11 @@ import ProjectRow from "./ProjectRow";
 import { TestRouter } from "cypress/TestRouter.js";
 
 const menuItems = [
-  { label: "view applications" },
-  { label: "members" },
-  { label: "secrets" },
+  { label: "View Applications" },
+  { label: "Members" },
+  { label: "Secrets" },
   { label: "divider" },
-  { label: "settings" },
+  { label: "Settings" },
 ];
 
 describe("ProjectRow Component", () => {

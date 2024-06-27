@@ -1,20 +1,33 @@
 import "@index.css";
 import Row from "./Row";
-import { MenuItem } from "@components/menu/items";
 import { TestRouter } from "cypress/TestRouter.js";
+import { ReactNode } from "react";
+import MenuItem from "@components/menu/MenuItem";
+import Typography from "@components/typography/Typography";
 
-const menuItems: MenuItem[] = [
-  { label: "View Applications" },
-  { label: "Members" },
-  { label: "Secrets" },
-  { label: "Settings" },
-];
+const menuItemLabels = ["test", "test2"];
+
+const menuItems: ReactNode = (
+  <>
+    <MenuItem>
+      <Typography as="p" variant="body-md" className="text-mono/basic-4 ">
+        test
+      </Typography>
+    </MenuItem>
+
+    <MenuItem>
+      <Typography as="p" variant="body-md" className="text-mono/basic-4 ">
+        test2
+      </Typography>
+    </MenuItem>
+  </>
+);
 
 describe("Row Component", () => {
   beforeEach(() => {
     cy.mount(
       <TestRouter>
-        <Row menuItems={menuItems}>row</Row>
+        <Row menuChildren={menuItems}>row</Row>
       </TestRouter>
     );
   });
@@ -28,9 +41,9 @@ describe("Row Component", () => {
     cy.get("svg").eq(1).click();
     cy.get(".cursor-pointer").should("exist");
 
-    cy.get(".cursor-pointer").should("have.length", menuItems.length + 1);
+    cy.get(".cursor-pointer").should("have.length", menuItemLabels.length + 1);
 
-    menuItems.forEach(({ label }) => {
+    menuItemLabels.forEach((label) => {
       cy.contains(label).should("exist");
     });
   });
@@ -39,7 +52,7 @@ describe("Row Component", () => {
     cy.get("svg").eq(1).click();
     cy.get("svg").eq(1).click();
 
-    menuItems.forEach(({ label }) => {
+    menuItemLabels.forEach((label) => {
       cy.contains(label).should("not.exist");
     });
   });

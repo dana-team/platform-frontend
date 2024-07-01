@@ -3,12 +3,13 @@ import ProjectCard from "./ProjectCard";
 import { TestRouter } from "cypress/TestRouter.js";
 
 const projectName = "Project Name";
+//FYI: becuase the menu items have the 'text-capitalize text propery they appear capitalized even though in the DOM they are lowercase
 const menuItems = [
-  { label: "view applications" },
-  { label: "members" },
-  { label: "secrets" },
+  { label: "View Applications" },
+  { label: "Members" },
+  { label: "Secrets" },
   { label: "divider" },
-  { label: "settings" },
+  { label: "Settings" },
 ];
 
 describe("ProjectCard Component", () => {

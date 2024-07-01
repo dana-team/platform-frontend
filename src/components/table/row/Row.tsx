@@ -4,14 +4,13 @@ import InformationCircle from "@/assets/information-circle.svg?react";
 import Typography from "@components/typography/Typography";
 import React, { ReactNode, useState } from "react";
 import Menu from "@components/menu/Menu";
-import { MenuItem } from "@components/menu/items";
 
 type RowProps = {
   children: ReactNode;
-  menuItems?: MenuItem[];
+  menuChildren: ReactNode;
 };
 
-const Row = React.memo(({ children, menuItems = [] }: RowProps) => {
+const Row = React.memo(({ children, menuChildren }: RowProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
 
@@ -26,7 +25,11 @@ const Row = React.memo(({ children, menuItems = [] }: RowProps) => {
           >
             <InformationCircle />
           </Typography>
-          <div onClick={() => setIsMenuOpen((prev) => !prev)}>
+          <div
+            onClick={() => {
+              setIsMenuOpen((prev) => !prev);
+            }}
+          >
             <Typography
               variant="headline-xs"
               className={`cursor-pointer ${isMenuOpen ? "rounded-full bg-mono/basic-11 text-green/basic-6" : "text-mono/basic-4"}`}
@@ -36,7 +39,9 @@ const Row = React.memo(({ children, menuItems = [] }: RowProps) => {
           </div>
           <div ref={setTarget}></div>
           {isMenuOpen && (
-            <Menu items={menuItems} isOpen={isMenuOpen} target={target} />
+            <Menu target={target} isOpen={isMenuOpen} className="">
+              {menuChildren}
+            </Menu>
           )}
         </div>
       </div>

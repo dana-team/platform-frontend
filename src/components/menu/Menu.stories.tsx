@@ -2,6 +2,25 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Menu from "./Menu";
 import { TestRouter } from "cypress/TestRouter";
+import { ReactNode } from "react";
+import MenuItem from "./MenuItem";
+import Typography from "@components/typography/Typography";
+
+const menuItems: ReactNode = (
+  <>
+    <MenuItem>
+      <Typography as="p" variant="body-md" className="text-mono/basic-4 ">
+        Storybook
+      </Typography>
+    </MenuItem>
+
+    <MenuItem>
+      <Typography as="p" variant="body-md" className="text-mono/basic-4 ">
+        Capp
+      </Typography>
+    </MenuItem>
+  </>
+);
 
 const meta = {
   component: Menu,
@@ -27,7 +46,7 @@ if (targetElement && !(targetElement instanceof HTMLDivElement)) {
 export const Default: Story = {
   args: {
     isOpen: true,
-    items: [{ label: "Item 1" }, { label: "Item 2" }, { label: "Item 3" }],
+    children: menuItems,
     target: targetElement as HTMLDivElement | null,
   },
 };

@@ -1,16 +1,34 @@
 import "@index.css";
 import Menu from "./Menu";
-import { MenuItem } from "./items";
 import { TestRouter } from "cypress/TestRouter.js";
+import { ReactNode } from "react";
+import MenuItem from "./MenuItem";
+import Typography from "@components/typography/Typography";
+import Divider from "./Divider";
+
+const menuItems: ReactNode = (
+  <>
+    <MenuItem>
+      <Typography as="p" variant="body-md" className="text-mono/basic-4 ">
+        Item 1
+      </Typography>
+    </MenuItem>
+
+    <MenuItem>
+      <Typography as="p" variant="body-md" className="text-mono/basic-4 ">
+        Item 2
+      </Typography>
+    </MenuItem>
+    <Divider />
+    <MenuItem>
+      <Typography as="p" variant="body-md" className="text-mono/basic-4 ">
+        Item 3
+      </Typography>
+    </MenuItem>
+  </>
+);
 
 describe("Menu Component", () => {
-  const items: MenuItem[] = [
-    { label: "Item 1", path: "/item1" },
-    { label: "Item 2", path: "/item2" },
-    { label: "divider" },
-    { label: "Item 3", path: "/item3" },
-  ];
-
   let target: HTMLDivElement | null;
 
   beforeEach(() => {
@@ -19,7 +37,7 @@ describe("Menu Component", () => {
 
     cy.mount(
       <TestRouter>
-        <Menu items={items} isOpen={true} target={target} />
+        <Menu children={menuItems} isOpen={true} target={target} />
       </TestRouter>
     );
   });
@@ -29,8 +47,8 @@ describe("Menu Component", () => {
   });
 
   it("Renders menu items", () => {
-    cy.get("a").contains("Item 1").should("be.visible");
-    cy.get("a").contains("Item 2").should("be.visible");
+    cy.get("p").contains("Item 1").should("be.visible");
+    cy.get("p").contains("Item 2").should("be.visible");
     cy.get("p").contains("Item 3").should("be.visible");
   });
 
@@ -38,19 +56,10 @@ describe("Menu Component", () => {
     cy.get("div").find("svg").should("exist");
   });
 
-  items.map((item) => {
-    if (item.label !== "divider") {
-      it(`Navigates to the ${item.path} path on click`, () => {
-        cy.get("a").contains(item.label).click();
-        cy.url().should("include", item.path);
-      });
-    }
-  });
-
   it("Does not render menu when isOpen is false", () => {
     cy.mount(
       <TestRouter>
-        <Menu items={items} isOpen={false} target={target} />
+        <Menu children={menuItems} isOpen={false} target={target} />
       </TestRouter>
     );
     cy.contains("Item 1").should("not.exist");

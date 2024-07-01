@@ -2,25 +2,17 @@
 import Thumbnail from "@/assets/account-thumbnails/color-3.svg?react";
 import Typography from "@components/typography/Typography";
 import React from "react";
-import { MenuItem } from "@components/menu/items";
 import Row from "@components/table/row/Row";
+import ProjectMenuItems from "../ProjectMenu";
 
 type ProjectRowProps = {
   name: string;
-  hierarchy: string; 
+  hierarchy: string;
 };
 
-const menuItems: (name: string) => MenuItem[] = (projectName) => [
-  { label: "view applications", path: `${projectName}/applications` },
-  { label: "members", path: `${projectName}/members` },
-  { label: "secrets", path: `${projectName}/secrets` },
-  { label: "divider", path: "" },
-  { label: "settings", path: `${projectName}/settings` },
-];
-
-const ProjectRow = React.memo(({ name, hierarchy}: ProjectRowProps) => {
+const ProjectRow = React.memo(({ name, hierarchy }: ProjectRowProps) => {
   return (
-    <Row menuItems={menuItems(name)}>
+    <Row menuChildren={<ProjectMenuItems projectName={name} />}>
       <div className="relative flex justify-center items-center">
         <Thumbnail />
         <div className="text-white absolute inset-0 flex justify-center items-center">

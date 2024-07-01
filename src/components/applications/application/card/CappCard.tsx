@@ -1,11 +1,11 @@
 import Thumbnail from "@/assets/account-thumbnails/color-3.svg?react";
 import Typography from "@components/typography/Typography";
-import React, { useMemo } from "react";
+import React from "react";
 import Card from "@components/card/Card";
 import OpenLink from "@/assets/open-link.svg?react";
 import Docker from "@/assets/icon-container.svg?react";
 import Button from "@components/button/Button";
-import { menuItems } from "../menuItems";
+import CappMenuItems from "../CappMenuItems";
 
 interface CappCardProps {
   projectName: string;
@@ -16,12 +16,12 @@ interface CappCardProps {
 
 const CappCard: React.FC<CappCardProps> = React.memo(
   ({ projectName, cappName, cappSource, deployment }: CappCardProps) => {
-    const items = useMemo(
-      () => menuItems(projectName, cappName),
-      [projectName, cappName]
-    );
     return (
-      <Card menuItems={items}>
+      <Card
+        menuChildren={
+          <CappMenuItems projectName={projectName} applicationName={cappName} />
+        }
+      >
         <div className="flex flex-row">
           <div className="relative flex justify-center items-center">
             <Thumbnail />

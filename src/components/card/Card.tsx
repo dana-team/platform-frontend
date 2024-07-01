@@ -3,15 +3,14 @@ import MoreInfoDots from "@/assets/moreInfo_dots.svg?react";
 import Typography from "@components/typography/Typography";
 import React, { ReactNode, useState } from "react";
 import Menu from "@components/menu/Menu";
-import { MenuItem } from "@components/menu/items";
 
 interface CardProps {
   children: ReactNode;
-  menuItems?: MenuItem[];
+  menuChildren: ReactNode;
 }
 
 const Card: React.FC<CardProps> = React.memo(
-  ({ menuItems = [], children }: CardProps) => {
+  ({ children, menuChildren }: CardProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [target, setTarget] = useState<HTMLDivElement | null>(null);
 
@@ -27,7 +26,9 @@ const Card: React.FC<CardProps> = React.memo(
           </div>
           <div ref={setTarget}></div>
           {isMenuOpen && (
-            <Menu items={menuItems} isOpen={isMenuOpen} target={target} />
+            <Menu target={target} isOpen={isMenuOpen} className="">
+              {menuChildren}
+            </Menu>
           )}
         </div>
         <div className="flex flex-none pl-5 pb-8 flex-col flex-grow overflow-hidden">

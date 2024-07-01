@@ -2,6 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Row from "./Row";
 import { TestRouter } from "cypress/TestRouter";
+import CappMenuItems from "@components/applications/application/CappMenuItems";
+
+const projectName = "Storybook"
+const cappName = "example"
 
 const meta = {
   component: Row,
@@ -23,12 +27,8 @@ export const Default: Story = {
     children: (
       <div className="relative flex justify-center items-center w-full grow " />
     ),
-    menuItems: [
-      { label: "view applications", path: "" },
-      { label: "members", path: `$projectName/members` },
-      { label: "secrets", path: `$projectName/secrets` },
-      { label: "divider", path: "" },
-      { label: "settings", path: `$projectName/settings` },
-    ],
+    menuChildren: (
+      <CappMenuItems projectName={projectName} applicationName={cappName} />
+    ),
   },
 };
